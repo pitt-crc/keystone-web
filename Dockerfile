@@ -1,16 +1,13 @@
-FROM node:14 as build
+FROM node:20 as build
 
-WORKDIR /app
+WORKDIR /build
 COPY . .
 
 # Install dependencies and build the application
-RUN npm install && ng build --prod
+RUN npm install &&  \
+    npm install -g @angular/cli && \
+    ng build
 
-FROM nginx:alpine
+FROM nginx:1.25-alpine
 
-# Copy compiled application into the final layer
-COPY --from=build /app/dist/your-angular-app /usr/share/nginx/html
-
-EXPOSE 80
-
-CMD ["nginx", "-g", "daemon off"]
+COPY --from=build /build/dist/keystone/ /usr/share/nginx/html
