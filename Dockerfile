@@ -6,8 +6,10 @@ COPY . .
 # Install dependencies and build the application
 RUN npm install &&  \
     npm install -g @angular/cli && \
-    ng build
+    ng build --configuration production
 
 FROM nginx:1.25-alpine
 
-COPY --from=build /build/dist/keystone/ /usr/share/nginx/html
+EXPOSE 80
+COPY --from=build /build/dist/keystone/browser /usr/share/nginx/html
+CMD ["nginx", "-g", "daemon off;"]
