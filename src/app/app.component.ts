@@ -15,19 +15,18 @@ import { HttpClient, HttpClientModule } from "@angular/common/http";
 export class AppComponent implements OnInit {
   httpClient = inject(HttpClient)
 
-  title: string = "Keystone";
+  apiVersion: string = ""
 
   ngOnInit(): void {
     this.getAPIVersion()
   }
 
   getAPIVersion(): void {
-    const endpoint = environment.API_URL + '/version/'
-    console.log(endpoint)
-    this.httpClient.get(endpoint)
+    const endpoint = environment.API_URL + '/version'
+    this.httpClient.get(endpoint, {responseType: 'text'})
       .subscribe(
-        (data) => {
-          console.log(data);
+        (data: string) => {
+          this.apiVersion = data
         }
       )
   }
