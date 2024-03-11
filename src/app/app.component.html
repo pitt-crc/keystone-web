@@ -1,2 +1,21 @@
 <h1>Welcome to Keystone</h1>
-<p>You are running API version {{ apiVersion }}</p>
+
+<div *ngIf="apiVersion; else notEmpty">
+  <p>You are running API version {{ apiVersion }}</p>
+</div>
+<ng-template #notEmpty>
+  <p>The backend API could not be reached.</p>
+</ng-template>
+
+<div *ngIf="healthData">
+  <h2>Health Check Summary</h2>
+  <div *ngFor="let item of healthData | keyvalue">
+    <h3>{{item.key}}</h3>
+    <ul>
+      <li>Status: {{ item.value.status }}</li>
+      <li>Message: {{ item.value.message }}</li>
+      <li>Time: {{ item.value.time }}</li>
+      <li>Critical Service: {{ item.value.critical_service ? 'Yes' : 'No' }}</li>
+    </ul>
+  </div>
+</div>
