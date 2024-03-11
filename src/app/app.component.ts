@@ -1,33 +1,33 @@
-import {Component, inject, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
-import { environment} from "../environments/environment";
-import { HttpClient, HttpClientModule } from "@angular/common/http";
-
+import { ApiService } from "./core/api.service";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, HttpClientModule],
+  imports: [CommonModule, RouterOutlet],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
 export class AppComponent implements OnInit {
-  httpClient = inject(HttpClient)
+  apiVersion = "N/A"
 
-  apiVersion: string = ""
-
-  ngOnInit(): void {
-    this.getAPIVersion()
+  constructor(private apiService: ApiService) {
   }
 
-  getAPIVersion(): void {
-    const endpoint = environment.API_URL + '/version'
-    this.httpClient.get(endpoint, {responseType: 'text'})
-      .subscribe(
-        (data: string) => {
-          this.apiVersion = data
-        }
-      )
+  ngOnInit(): void {
+    this.fetchVersion();
+  }
+
+  fetchVersion(): void {
+    this.apiService.versionGet().subscribe({
+      next: (data: string) => {
+        this.apiVersion = data;
+      },
+      error: (error) => {
+        console.error('Error fetching API version:', error);
+      }
+    });
   }
 }
