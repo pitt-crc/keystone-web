@@ -11,7 +11,7 @@ import { ApiService } from "./core/api.service";
 })
 export class AppComponent implements OnInit {
   apiVersion: string = ""
-  healthData: any[] = []
+  healthData: null | any[] = null
 
   constructor(private apiService: ApiService) {}
 
@@ -36,8 +36,14 @@ export class AppComponent implements OnInit {
       next: (data) => {
         this.healthData = data.message;
       },
-      error: (data) => {
-        this.healthData = data.error;
+      error: (error) => {
+        if ( error.status === 0 ) {
+          // Handle connection failures separately
+          console.log(error);
+        } else {
+          // Other errors should still contain health data indicating what is failing
+          this.healthData = error.error;
+        }
       }
     })
   }
