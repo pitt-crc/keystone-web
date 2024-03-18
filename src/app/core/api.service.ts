@@ -122,7 +122,7 @@ export class ApiService {
     }
 
     // If the refresh fails, assume the refresh taken is expired and log the user out
-    const refreshData = {refreshToken: this.refreshToken};
+    const refreshData = {refresh: this.refreshToken};
     const refreshHeaders = new HttpHeaders({'Content-Type': 'application/json'})
     this.http.post(this.refreshEndpoint.href, refreshData, {headers: refreshHeaders}).subscribe({
       next: (response: any) => {
