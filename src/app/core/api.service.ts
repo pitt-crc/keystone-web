@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { jwtDecode } from "jwt-decode";
 
@@ -23,15 +23,15 @@ export class ApiService {
     return !!this.accessToken;
   }
 
-  public login(username: string, password: string): void {
-    this.http.post(this.authEndpoint.href, {'username': username, 'password': password})
-      .subscribe({
-        next: (response: any) => {
+  public login(username: string, password: string): Observable<any> {
+    return this.http.post(this.authEndpoint.href, {'username': username, 'password': password})
+      .pipe(
+        map((response: any) => {
           this.accessToken = response.access;
           this.refreshToken = response.refresh;
           this.expirationTime = new Date(<number>jwtDecode(<string>this.accessToken).exp)
         }
-      });
+      ));
   }
 
   public logout(): void {
@@ -41,6 +41,7 @@ export class ApiService {
   }
 
   public get(endpoint: string): Observable<any> {
+    console.log(this.accessToken)
     this.refreshAuthToken();
     const url = new URL(endpoint, this.apiURL);
     return this.http.get(url.href, {headers: this.getAuthHeaders()});
@@ -71,7 +72,7 @@ export class ApiService {
   }
 
   private refreshAuthToken(): void {
-    // Only refresh the token if th user is logged in and the token has expired
+    // Only refresh the token if the user is logged in and the token has expired
     const now = new Date()
     if (this.isAuthenticated() || now >= <Date>this.expirationTime) {
       return
