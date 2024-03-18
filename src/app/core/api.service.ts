@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
+import { jwtDecode } from "jwt-decode";
 
 
 @Injectable({
@@ -10,6 +11,8 @@ import { environment } from '../../environments/environment';
 export class ApiService {
   private accessToken: string | null = null;
   private refreshToken: string | null = null;
+  private expirationTime: Date | null = null;
+
   private apiURL: URL = new URL(environment.apiURL);
   private authEndpoint: URL = new URL('authentication/new/', this.apiURL);
   private refreshEndpoint: URL = new URL('authentication/refresh/', this.apiURL);
@@ -26,14 +29,15 @@ export class ApiService {
         next: (response: any) => {
           this.accessToken = response.access;
           this.refreshToken = response.refresh;
+          this.expirationTime = new Date(<number>jwtDecode(<string>this.accessToken).exp)
         }
       });
-    console.log(this.accessToken)
   }
 
   public logout(): void {
     this.accessToken = null;
     this.refreshToken = null;
+    this.expirationTime = null;
   }
 
   public get(endpoint: string): Observable<any> {
@@ -67,14 +71,15 @@ export class ApiService {
   }
 
   private refreshAuthToken(): void {
-
-    if (!this.refreshToken) {
+    // Only refresh the token if th user is logged in and the token has expired
+    const now = new Date()
+    if (this.isAuthenticated() || now >= <Date>this.expirationTime) {
       return
     }
 
+    // If the refresh fails, assume the refresh taken is expired and log the user out
     const refreshData = {refreshToken: this.refreshToken};
     const refreshHeaders = new HttpHeaders({'Content-Type': 'application/json'})
-
     this.http.post(this.refreshEndpoint.href, refreshData, {headers: refreshHeaders}).subscribe({
       next: (response: any) => {
         this.accessToken = response.access;
