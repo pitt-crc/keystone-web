@@ -27,7 +27,7 @@ export class ApiService {
   }
 
   /**
-   * Log in a user with the given credentials.
+   * Authenticate the current API session using the given credentials.
    * @param username The username
    * @param password The password
    * @returns An observable of the login request
@@ -53,7 +53,7 @@ export class ApiService {
   }
 
   /**
-   * Perform a GET request.
+   * Perform a GET request against the backend API.
    * @param endpoint The endpoint to request
    * @returns An observable of the request
    */
@@ -64,7 +64,7 @@ export class ApiService {
   }
 
   /**
-   * Perform a POST request.
+   * Perform a POST request against the backend API.
    * @param endpoint The endpoint to request
    * @param data The data to send
    * @returns An observable of the request
@@ -76,7 +76,7 @@ export class ApiService {
   }
 
   /**
-   * Perform a PUT request.
+   * Perform a PUT request against the backend API.
    * @param endpoint The endpoint to request
    * @param data The data to send
    * @returns An observable of the request
@@ -88,7 +88,7 @@ export class ApiService {
   }
 
   /**
-   * Perform a PATCH request.
+   * Perform a PATCH request against the backend API.
    * @param endpoint The endpoint to request
    * @param data The data to send
    * @returns An observable of the request
@@ -100,7 +100,7 @@ export class ApiService {
   }
 
   /**
-   * Perform a DELETE request.
+   * Perform a DELETE request against the backend API.
    * @param endpoint The endpoint to request
    * @returns An observable of the request
    */
@@ -136,7 +136,7 @@ export class ApiService {
   }
 
   /**
-   * Retrieves the authentication headers.
+   * Retrieve the authentication headers.
    * @returns HttpHeaders containing the authentication token if available
    */
   private getAuthHeaders(): HttpHeaders {
