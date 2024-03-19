@@ -8,7 +8,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:keystone": "node dist/keystone/server/server.mjs",
-    "test:ci": "ng test --watch=false --browsers=ChromeHeadlessCustom",
+    "test:ci": "ng test --watch=false --browsers=ChromeHeadlessCustom"
   },
   "private": true,
   "dependencies": {
