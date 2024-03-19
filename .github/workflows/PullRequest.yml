@@ -11,6 +11,7 @@ jobs:
   qa:
     name: QA
     uses: ./.github/workflows/QA.yml
+    secrets: inherit
 
   report-pr-status:
     name: Report PR Status
