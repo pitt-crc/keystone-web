@@ -1,4 +1,4 @@
-# Keystone
+# Keystone Web Interface
 
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/e20bea54965a48d892e5939b15f6ba85)](https://app.codacy.com/gh/pitt-crc/keystone-web/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
 
