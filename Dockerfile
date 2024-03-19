@@ -1,4 +1,4 @@
-FROM node:20 as build
+FROM node:20-slim as build
 
 WORKDIR /build
 COPY . .
@@ -6,7 +6,7 @@ COPY . .
 # Install dependencies and build the application
 RUN npm install &&  \
     npm install -g @angular/cli && \
-    ng build --configuration production
+    ng build
 
 FROM nginx:1.25-alpine
 
