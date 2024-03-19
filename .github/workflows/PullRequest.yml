@@ -8,10 +8,14 @@ jobs:
     name: Test
     uses: ./.github/workflows/Test.yml
 
+  qa:
+    name: QA
+    uses: ./.github/workflows/QA.yml
+
   report-pr-status:
     name: Report PR Status
     runs-on: ubuntu-latest
-    needs: [ test ]
+    needs: [ test, qa ]
     if: always()
 
     steps:
