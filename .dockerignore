@@ -1,1 +1,21 @@
+# npm files
 node_modules
+package-lock.json
+
+# Angular
+.angular-cli.json
+.angular.json
+
+# Build files
+/dist
+
+# IDE configs
+.vscode
+.idea
+
+# Git data
+.git
+.gitignore
+
+# Everything else
+.env
