@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { ApiService } from "../../../common/services/api.service";
 
 @Component({
   selector: 'app-login',
@@ -11,9 +12,13 @@ export class LoginComponent {
   username: string = '';
   password: string = '';
 
+  constructor(private apiService: ApiService) {}
+
   onSubmit(): void {
-    console.log('Form submitted');
-    console.log('Username:', this.username);
-    console.log('Password:', this.password);
+    console.log('submitted')
+    this.apiService.login(this.username, this.password).subscribe({
+      next: () => alert('SUCCESS'),
+      error: (error) => alert('FAILURE')
+    })
   }
 }
