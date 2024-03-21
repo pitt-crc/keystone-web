@@ -4,7 +4,7 @@ import { ApiService } from "../../../common/services/api.service";
 @Component({
   selector: 'app-logout',
   standalone: true,
-  templateUrl: './logout.component.html',
+  templateUrl: 'logout.component.html',
 })
 export class LogoutComponent implements OnInit{
 
