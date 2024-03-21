@@ -18,7 +18,7 @@ export class LoginComponent {
     console.log('submitted')
     this.apiService.login(this.username, this.password).subscribe({
       next: () => alert('SUCCESS'),
-      error: (error) => alert('FAILURE')
+      error: () => alert('FAILURE')
     })
   }
 }
