@@ -8,10 +8,6 @@ import { jwtDecode } from "jwt-decode";
   providedIn: 'root'
 })
 export class ApiService {
-  private accessToken: string | null = null;
-  private refreshToken: string | null = null;
-  private expirationTime: Date | null = null;
-
   private apiURL: URL = new URL(environment.apiURL);
   private authEndpoint: URL = new URL('authentication/new/', this.apiURL);
   private refreshEndpoint: URL = new URL('authentication/refresh/', this.apiURL);
@@ -23,7 +19,7 @@ export class ApiService {
    * @returns true if the user is authenticated, false otherwise
    */
   public isAuthenticated(): boolean {
-    return !!this.accessToken;
+    return !!localStorage.getItem('accessToken');
   }
 
   /**
@@ -36,9 +32,8 @@ export class ApiService {
     return this.http.post(this.authEndpoint.href, {'username': username, 'password': password})
       .pipe(
         map((response: any) => {
-            this.accessToken = response.access;
-            this.refreshToken = response.refresh;
-            this.expirationTime = new Date(<number>jwtDecode(<string>this.accessToken).exp)
+            localStorage.setItem('accessToken', response.access);
+            localStorage.setItem('refreshToken', response.refresh);
           }
         ));
   }
@@ -47,9 +42,8 @@ export class ApiService {
    * Log out the current API session.
    */
   public logout(): void {
-    this.accessToken = null;
-    this.refreshToken = null;
-    this.expirationTime = null;
+    localStorage.removeItem('accessToken');
+    localStorage.removeItem('refreshToken');
   }
 
   /**
@@ -117,16 +111,17 @@ export class ApiService {
   private refreshAuthToken(): void {
     // Only refresh the token if the user is logged in and the token has expired
     const now = new Date()
-    if (this.isAuthenticated() || now >= <Date>this.expirationTime) {
+    const expirationTime = new Date(<number>jwtDecode(localStorage.getItem('accessToken')).exp)
+    if (this.isAuthenticated() || now >= expirationTime) {
       return;
     }
 
     // If the refresh fails, assume the refresh taken is expired and log the user out
-    const refreshData = {refresh: this.refreshToken};
+    const refreshData = {refresh: localStorage.getItem('refreshToken')};
     const refreshHeaders = new HttpHeaders({'Content-Type': 'application/json'})
     this.http.post(this.refreshEndpoint.href, refreshData, {headers: refreshHeaders}).subscribe({
       next: (response: any) => {
-        this.accessToken = response.access;
+        localStorage.setItem('accessToken', response.access);
       },
       error: (error) => {
         this.logout();
@@ -140,9 +135,10 @@ export class ApiService {
    * @returns HttpHeaders containing the authentication token if available
    */
   private getAuthHeaders(): HttpHeaders {
-    if (this.accessToken) {
+    const accessToken = localStorage.getItem('accessToken');
+    if (accessToken) {
       return new HttpHeaders({
-        'Authorization': 'Bearer ' + this.accessToken
+        'Authorization': 'Bearer ' + accessToken
       });
     } else {
       return new HttpHeaders();

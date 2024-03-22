@@ -15,10 +15,17 @@ export class LoginComponent {
   constructor(private apiService: ApiService) {}
 
   onSubmit(): void {
-    console.log('submitted')
     this.apiService.login(this.username, this.password).subscribe({
-      next: () => alert('SUCCESS'),
-      error: () => alert('FAILURE')
+      next: this.handleSuccessfulLogin,
+      error: this.handleUnsuccessfulLogin
     })
+  }
+
+  handleSuccessfulLogin(): void {
+    alert('SUCCESS');
+  }
+
+  handleUnsuccessfulLogin(): void {
+    alert('FAILURE');
   }
 }
