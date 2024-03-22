@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ApiService } from "../../../common/services/api.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -8,11 +9,17 @@ import { ApiService } from "../../../common/services/api.service";
   imports: [FormsModule],
   templateUrl: 'login.component.html',
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   username: string = '';
   password: string = '';
 
-  constructor(private apiService: ApiService) {}
+  constructor(private apiService: ApiService, private router: Router) {}
+
+  ngOnInit(): void {
+    if (this.apiService.isAuthenticated()) {
+      this.handleSuccessfulLogin();
+    }
+  }
 
   onSubmit(): void {
     this.apiService.login(this.username, this.password).subscribe({
@@ -22,10 +29,10 @@ export class LoginComponent {
   }
 
   handleSuccessfulLogin(): void {
-    alert('SUCCESS');
+    this.router.navigateByUrl('');
   }
 
   handleUnsuccessfulLogin(): void {
-    alert('FAILURE');
+    alert('Could not authenticate.');
   }
 }

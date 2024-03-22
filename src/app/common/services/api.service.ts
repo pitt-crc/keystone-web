@@ -114,7 +114,7 @@ export class ApiService {
 
     // Only refresh the token if the user is logged in and the token has expired
     const now = new Date().getDate()
-    if (!accessToken || now >= (jwtDecode(accessToken)?.exp ?? 0)) {
+    if (!accessToken || now < <number>jwtDecode(accessToken).exp) {
       return;
     }
 
