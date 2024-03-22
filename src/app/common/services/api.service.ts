@@ -112,11 +112,11 @@ export class ApiService {
     // Only refresh the token if the user is logged in and the token has expired
     const now = new Date()
     const expirationTime = new Date(<number>jwtDecode(localStorage.getItem('accessToken')).exp)
-    if (this.isAuthenticated() || now >= expirationTime) {
+    if (this.isAuthenticated() && now >= expirationTime) {
       return;
     }
 
-    // If the refresh fails, assume the refresh taken is expired and log the user out
+    // If the refresh fails, assume the refresh token is expired and log the user out
     const refreshData = {refresh: localStorage.getItem('refreshToken')};
     const refreshHeaders = new HttpHeaders({'Content-Type': 'application/json'})
     this.http.post(this.refreshEndpoint.href, refreshData, {headers: refreshHeaders}).subscribe({
