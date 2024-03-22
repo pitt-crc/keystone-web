@@ -109,23 +109,23 @@ export class ApiService {
    * or the authentication token is not expired, this method does nothing.
    */
   private refreshAuthToken(): void {
+    const accessToken = localStorage.getItem('accessToken');
+    const refreshToken = localStorage.getItem('refreshToken');
+
     // Only refresh the token if the user is logged in and the token has expired
-    const now = new Date()
-    const expirationTime = new Date(<number>jwtDecode(localStorage.getItem('accessToken')).exp)
-    if (this.isAuthenticated() && now >= expirationTime) {
+    const now = new Date().getDate()
+    if (!accessToken || now >= (jwtDecode(accessToken)?.exp ?? 0)) {
       return;
     }
 
     // If the refresh fails, assume the refresh token is expired and log the user out
-    const refreshData = {refresh: localStorage.getItem('refreshToken')};
     const refreshHeaders = new HttpHeaders({'Content-Type': 'application/json'})
-    this.http.post(this.refreshEndpoint.href, refreshData, {headers: refreshHeaders}).subscribe({
+    this.http.post(this.refreshEndpoint.href, {refresh: refreshToken}, {headers: refreshHeaders}).subscribe({
       next: (response: any) => {
         localStorage.setItem('accessToken', response.access);
       },
       error: (error) => {
         this.logout();
-        throw new Error('Could not refresh token. Logging user out.');
       }
     });
   }
