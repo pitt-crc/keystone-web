@@ -19,6 +19,7 @@ export class ApiService {
    * @returns true if the user is authenticated, false otherwise
    */
   public isAuthenticated(): boolean {
+    this.refreshAuthToken();
     return !!localStorage.getItem('accessToken');
   }
 
