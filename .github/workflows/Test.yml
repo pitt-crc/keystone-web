@@ -36,5 +36,5 @@ jobs:
 
     steps:
       - name: Check test status
-        if: ${{ contains(needs.*.result, 'failure') }}
+        if: ${{ contains(needs.*.result, 'failure') || contains(needs.*.result, 'skipped') }}
         run: exit 1
