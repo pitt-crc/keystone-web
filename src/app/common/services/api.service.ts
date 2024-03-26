@@ -52,7 +52,7 @@ export class ApiService {
    * @param endpoint The endpoint to request
    * @returns An observable of the request
    */
-  public get(endpoint: string): Observable<any> {
+  public get(endpoint: string): Observable<Object> {
     this.refreshAuthToken();
     const url = new URL(endpoint, this.apiURL);
     return this.http.get(url.href, {headers: this.getAuthHeaders()});
@@ -64,7 +64,7 @@ export class ApiService {
    * @param data The data to send
    * @returns An observable of the request
    */
-  public post(endpoint: string, data: object): Observable<any> {
+  public post(endpoint: string, data: object): Observable<Object> {
     this.refreshAuthToken();
     const url = new URL(endpoint, this.apiURL);
     return this.http.post(url.href, {headers: this.getAuthHeaders()});
@@ -76,7 +76,7 @@ export class ApiService {
    * @param data The data to send
    * @returns An observable of the request
    */
-  public put(endpoint: string, data: object): Observable<any> {
+  public put(endpoint: string, data: object): Observable<Object> {
     this.refreshAuthToken();
     const url = new URL(endpoint, this.apiURL);
     return this.http.put(url.href, data, {headers: this.getAuthHeaders()});
@@ -88,7 +88,7 @@ export class ApiService {
    * @param data The data to send
    * @returns An observable of the request
    */
-  public patch(endpoint: string, data: object): Observable<any> {
+  public patch(endpoint: string, data: object): Observable<Object> {
     this.refreshAuthToken();
     const url = new URL(endpoint, this.apiURL);
     return this.http.patch(url.href, data, {headers: this.getAuthHeaders()});
@@ -99,7 +99,7 @@ export class ApiService {
    * @param endpoint The endpoint to request
    * @returns An observable of the request
    */
-  public delete(endpoint: string): Observable<any> {
+  public delete(endpoint: string): Observable<Object> {
     this.refreshAuthToken();
     const url = new URL(endpoint, this.apiURL);
     return this.http.delete(url.href, {headers: this.getAuthHeaders()});
@@ -125,7 +125,7 @@ export class ApiService {
       next: (response: any) => {
         localStorage.setItem('accessToken', response.access);
       },
-      error: (error) => {
+      error: () => {
         this.logout();
       }
     });
