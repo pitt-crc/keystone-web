@@ -52,7 +52,7 @@ export class ApiService {
    * @param endpoint The endpoint to request
    * @returns An observable of the request
    */
-  public get(endpoint: string): Observable<Object> {
+  public get(endpoint: string): Observable<object> {
     this.refreshAuthToken();
     const url = new URL(endpoint, this.apiURL);
     return this.http.get(url.href, {headers: this.getAuthHeaders()});
@@ -64,10 +64,10 @@ export class ApiService {
    * @param data The data to send
    * @returns An observable of the request
    */
-  public post(endpoint: string, data: object): Observable<Object> {
+  public post(endpoint: string, data: object): Observable<object> {
     this.refreshAuthToken();
     const url = new URL(endpoint, this.apiURL);
-    return this.http.post(url.href, {headers: this.getAuthHeaders()});
+    return this.http.post(url.href, data,{headers: this.getAuthHeaders()});
   }
 
   /**
@@ -76,7 +76,7 @@ export class ApiService {
    * @param data The data to send
    * @returns An observable of the request
    */
-  public put(endpoint: string, data: object): Observable<Object> {
+  public put(endpoint: string, data: object): Observable<object> {
     this.refreshAuthToken();
     const url = new URL(endpoint, this.apiURL);
     return this.http.put(url.href, data, {headers: this.getAuthHeaders()});
@@ -88,7 +88,7 @@ export class ApiService {
    * @param data The data to send
    * @returns An observable of the request
    */
-  public patch(endpoint: string, data: object): Observable<Object> {
+  public patch(endpoint: string, data: object): Observable<object> {
     this.refreshAuthToken();
     const url = new URL(endpoint, this.apiURL);
     return this.http.patch(url.href, data, {headers: this.getAuthHeaders()});
@@ -99,7 +99,7 @@ export class ApiService {
    * @param endpoint The endpoint to request
    * @returns An observable of the request
    */
-  public delete(endpoint: string): Observable<Object> {
+  public delete(endpoint: string): Observable<object> {
     this.refreshAuthToken();
     const url = new URL(endpoint, this.apiURL);
     return this.http.delete(url.href, {headers: this.getAuthHeaders()});
