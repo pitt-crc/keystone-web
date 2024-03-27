@@ -10,6 +10,9 @@ export class LogoutComponent implements OnInit{
 
   constructor(private apiService: ApiService) {}
 
+  /**
+   * Automatically log the user out on page loa
+   */
   ngOnInit(): void {
     this.apiService.logout()
   }
