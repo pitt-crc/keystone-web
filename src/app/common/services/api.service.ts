@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { jwtDecode } from "jwt-decode";
-import { catchError, finalize, map, Observable, of, throwError } from 'rxjs';
+import { finalize, map, Observable, of } from 'rxjs';
 
 import { environment } from '../../../environments/environment';
 
@@ -93,7 +93,8 @@ export class ApiService {
         map((response: any) => {
           this.accessToken = response.access;
           this.refreshToken = response.refresh;
-        }));
+        })
+      );
   }
 
   /**
@@ -194,7 +195,6 @@ export class ApiService {
     const refreshHeaders = new HttpHeaders({'Content-Type': 'application/json'});
     this.http.post(this.refreshEndpoint.href, {refresh: this.refreshToken}, {headers: refreshHeaders}).subscribe({
       next: (response: any) => {
-        console.log('updating tokens');
         this.accessToken = response.access;
       },
       error: () => {
