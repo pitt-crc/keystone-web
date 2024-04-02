@@ -29,9 +29,13 @@ export class LoginComponent implements OnInit {
    */
   onSubmit(): void {
     this.apiService.login(this.username, this.password).subscribe({
-      next: () => {this.handleSuccessfulLogin()},
-      error: () => {this.handleUnsuccessfulLogin()}
-    })
+      next: () => {
+        this.handleSuccessfulLogin();
+      },
+      error: () => {
+        this.handleUnsuccessfulLogin();
+      }
+    });
   }
 
   /**
