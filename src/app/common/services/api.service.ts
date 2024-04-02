@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { jwtDecode } from "jwt-decode";
-import { finalize, map, Observable } from 'rxjs';
+import { catchError, finalize, map, Observable, of, throwError } from 'rxjs';
 
 import { environment } from '../../../environments/environment';
 
@@ -101,6 +101,10 @@ export class ApiService {
    * @returns An observable of the logout request
    */
   public logout(): Observable<void> {
+    if (!this.isAuthenticated()) {
+      return of(void 0);
+    }
+
     return this.http.post(this.blacklistEndpoint.href, {refresh: this.refreshToken}).pipe(
       map(() => {}),
       finalize(() => {
