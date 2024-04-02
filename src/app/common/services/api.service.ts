@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { jwtDecode } from "jwt-decode";
-import { catchError, map, Observable } from 'rxjs';
+import { finalize, map, Observable } from 'rxjs';
 
 import { environment } from '../../../environments/environment';
 
@@ -15,7 +15,8 @@ export class ApiService {
   private refreshEndpoint: URL = new URL('authentication/refresh/', this.apiURL);
   private blacklistEndpoint: URL = new URL('authentication/blacklist/', this.apiURL);
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+  }
 
   /**
    * Get the current JWT access token.
@@ -35,7 +36,7 @@ export class ApiService {
 
   /**
    * Get the expiration time of the JWT access token.
-   * @returns The expiration time of the access token if available, otherwise null
+   * @returns The expiration time of the access token in milliseconds if available, otherwise null
    */
   private get accessTokenExpiration(): number | null {
     if (this.accessToken) {
@@ -63,7 +64,7 @@ export class ApiService {
 
   /**
    * Get the expiration time of the refresh token.
-   * @returns The expiration time of the refresh token if available, otherwise null
+   * @returns The expiration time of the refresh token in milliseconds if available, otherwise null
    */
   private get refreshTokenExpiration(): number | null {
     if (this.refreshToken) {
@@ -74,7 +75,7 @@ export class ApiService {
   }
 
   /**
-   * Delete all JWT token data.
+   * Delete all local JWT data.
    */
   private clearTokens(): void {
     localStorage.removeItem('accessToken');
@@ -98,10 +99,16 @@ export class ApiService {
 
   /**
    * Log out the current API session and clear any token data.
+   * @returns An observable of the logout request
    */
   public logout(): Observable<void> {
-    this.clearTokens();
-    return this.http.post(this.blacklistEndpoint.href, {refresh: this.refreshToken});
+    return this.http.post(this.blacklistEndpoint.href, {refresh: this.refreshToken}).pipe(
+      map(() => {
+      }),
+      finalize(() => {
+        this.clearTokens();
+      })
+    );
   }
 
   /**
@@ -133,7 +140,7 @@ export class ApiService {
   public post(endpoint: string, data: object): Observable<object> {
     this.refreshAuthTokens();
     const url = new URL(endpoint, this.apiURL);
-    return this.http.post(url.href, data,{headers: this.getAuthHeaders()});
+    return this.http.post(url.href, data, {headers: this.getAuthHeaders()});
   }
 
   /**
@@ -182,13 +189,16 @@ export class ApiService {
     }
 
     // If the refresh fails, assume the refresh token is expired and log the user out
-    const refreshHeaders = new HttpHeaders({'Content-Type': 'application/json'})
-    this.http.post(this.refreshEndpoint.href, {refresh: this.refreshToken}, {headers: refreshHeaders}).pipe(
-        map((response: any) => {
-          this.accessToken = response.access;
-        }),
-        catchError(this.logout)
-    );
+    const refreshHeaders = new HttpHeaders({'Content-Type': 'application/json'});
+    this.http.post(this.refreshEndpoint.href, {refresh: this.refreshToken}, {headers: refreshHeaders}).subscribe({
+      next: (response: any) => {
+        console.log('updating tokens');
+        this.accessToken = response.access;
+      },
+      error: () => {
+        this.logout();
+      }
+    });
   }
 
   /**
