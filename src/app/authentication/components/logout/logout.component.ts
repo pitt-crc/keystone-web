@@ -6,7 +6,7 @@ import { ApiService } from "../../../common/services/api.service";
   standalone: true,
   templateUrl: 'logout.component.html',
 })
-export class LogoutComponent implements OnInit{
+export class LogoutComponent implements OnInit {
 
   constructor(private apiService: ApiService) {}
 
@@ -14,7 +14,7 @@ export class LogoutComponent implements OnInit{
    * Automatically log the user out on page loa
    */
   ngOnInit(): void {
-    this.apiService.logout()
+    this.apiService.logout().subscribe();
   }
 
 }
