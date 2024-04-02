@@ -15,8 +15,7 @@ export class ApiService {
   private refreshEndpoint: URL = new URL('authentication/refresh/', this.apiURL);
   private blacklistEndpoint: URL = new URL('authentication/blacklist/', this.apiURL);
 
-  constructor(private http: HttpClient) {
-  }
+  constructor(private http: HttpClient) {}
 
   /**
    * Get the current JWT access token.
@@ -103,8 +102,7 @@ export class ApiService {
    */
   public logout(): Observable<void> {
     return this.http.post(this.blacklistEndpoint.href, {refresh: this.refreshToken}).pipe(
-      map(() => {
-      }),
+      map(() => {}),
       finalize(() => {
         this.clearTokens();
       })
