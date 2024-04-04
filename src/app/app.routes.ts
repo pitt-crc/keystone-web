@@ -8,7 +8,7 @@ import { LogoutComponent } from "./authentication/components/logout/logout.compo
 import { PageNotFoundComponent } from "./common/components/page-not-found/page-not-found.component";
 
 export const routes: Routes = [
-    {path: '', redirectTo: 'app', pathMatch: 'full' },
+    {path: '', redirectTo: 'dashboard', pathMatch: 'full' },
     {path: 'dashboard', component: DashboardLayoutComponent, canActivate: [authGuard]},
     {path: 'auth', component: AuthComponent, children: [
         {path: 'login', component: LoginComponent},
