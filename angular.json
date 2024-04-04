@@ -30,7 +30,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/scss/style.scss"
             ],
             "scripts": [],
             "server": "src/main.server.ts",
@@ -95,7 +95,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/scss/style.scss"
             ],
             "scripts": [],
             "karmaConfig": "karma.conf.js"
@@ -103,5 +103,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": false
   }
 }
