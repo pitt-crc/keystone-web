@@ -97,7 +97,10 @@
             "styles": [
               "src/scss/style.scss"
             ],
-            "scripts": [],
+            "scripts": [
+              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/bootstrap/dist/js/bootstrap.min.js"
+            ],
             "karmaConfig": "karma.conf.js"
           }
         }
