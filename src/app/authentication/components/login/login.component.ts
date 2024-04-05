@@ -2,16 +2,21 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ApiService } from "../../../common/services/api.service";
 import { Router } from "@angular/router";
+import { CommonModule } from "@angular/common";
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, CommonModule],
   templateUrl: 'login.component.html',
 })
 export class LoginComponent implements OnInit {
   username = '';
   password = '';
+  errorMessage = '';
+  submitButtonText = 'Sign In';
+  submitButtonEnabled = true;
+  showSubmitSpinner = false;
 
   constructor(private apiService: ApiService, private router: Router) {}
 
@@ -20,31 +25,56 @@ export class LoginComponent implements OnInit {
    */
   ngOnInit(): void {
     if (this.apiService.isAuthenticated()) {
-      this.handleSuccessfulLogin();
+      this.redirectSuccessfulLogin();
     }
   }
 
   /**
-   * Passes user provided credentials to th backend API and handle the authentication result.
+   * Pass user provided credentials to th backend API and handle the authentication result.
    */
   onSubmit(): void {
+    this.disableSubmitButton();
     this.apiService.login(this.username, this.password).subscribe({
-      next: () => {this.handleSuccessfulLogin()},
-      error: () => {this.handleUnsuccessfulLogin()}
-    })
+      next: () => {
+        this.redirectSuccessfulLogin();
+      },
+      error: () => {
+        this.displayErrorMessage();
+      }
+    });
+    this.enableSubmitButton();
   }
 
   /**
-   * Redirects the user to the home page upon successful login.
+   * Redirect the user to the home page upon successful login.
    */
-  handleSuccessfulLogin(): void {
+  private redirectSuccessfulLogin(): void {
     this.router.navigateByUrl('');
   }
 
   /**
-   * Updates page content to alert the user their login was unsuccessful.
+   * Display a friendly error message indicating invalid login credentials
    */
-  handleUnsuccessfulLogin(): void {
-    alert('Could not authenticate.');
+  private displayErrorMessage(): void {
+    this.errorMessage = "Invalid credentials. Please try again.";
+  }
+
+  /**
+   * Disable the login button and update it's content
+   */
+  private disableSubmitButton(): void {
+    console.log('called')
+    this.submitButtonEnabled = false;
+    this.submitButtonText = 'Logging In...';
+    this.showSubmitSpinner = true;
+  }
+
+  /**
+   * Enable the login button and update it's content
+   */
+  private enableSubmitButton(): void {
+    this.submitButtonEnabled = true;
+    this.submitButtonText = 'Sign In';
+    this.showSubmitSpinner = false;
   }
 }
