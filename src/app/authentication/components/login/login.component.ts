@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ApiService } from "../../../common/services/api.service";
 import { Router } from "@angular/router";
 import { CommonModule } from "@angular/common";
+
+import { ApiService } from "../../../common/services/api.service";
 
 @Component({
   selector: 'app-login',
@@ -35,10 +36,10 @@ export class LoginComponent implements OnInit {
   onSubmit(): void {
     this.disableSubmitButton();
     this.apiService.login(this.username, this.password).subscribe({
-      next: () => {
+      next: (): void => {
         this.redirectSuccessfulLogin();
       },
-      error: () => {
+      error: (): void => {
         this.displayErrorMessage();
       }
     });
@@ -63,7 +64,7 @@ export class LoginComponent implements OnInit {
    * Disable the login button and update it's content
    */
   private disableSubmitButton(): void {
-    console.log('called')
+    console.log('called');
     this.submitButtonEnabled = false;
     this.submitButtonText = 'Logging In...';
     this.showSubmitSpinner = true;
