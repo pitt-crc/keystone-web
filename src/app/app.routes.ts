@@ -1,14 +1,16 @@
 import { Routes } from '@angular/router';
+
+import { AuthLayoutComponent } from "./authentication/components/auth-layout/auth-layout.component";
+import { authGuard } from "./authentication/guards/authGuard";
+import { DashboardLayoutComponent } from "./dashboard/components/dashboardLayout/dashboardLayout.component";
 import { LoginComponent } from "./authentication/components/login/login.component";
 import { LogoutComponent } from "./authentication/components/logout/logout.component";
-import { DashboardComponent } from "./dashboard/components/dashboard/dashboard.component";
-import { authGuard } from "./authentication/guards/authGuard";
 import { PageNotFoundComponent } from "./common/components/page-not-found/page-not-found.component";
-import { AuthComponent } from "./authentication/components/auth/auth.component";
 
 export const routes: Routes = [
-    {path: '', component: DashboardComponent, canActivate: [authGuard]},
-    {path: 'auth', component: AuthComponent, children: [
+    {path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+    {path: 'dashboard', component: DashboardLayoutComponent, canActivate: [authGuard]},
+    {path: 'auth', component: AuthLayoutComponent, children: [
         {path: 'login', component: LoginComponent},
         {path: 'logout', component: LogoutComponent},
     ]},
