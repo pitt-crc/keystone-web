@@ -30,7 +30,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/scss/style.scss"
+              "src/assets/scss/theme/style.scss"
             ],
             "scripts": [],
             "server": "src/main.server.ts",
@@ -94,13 +94,8 @@
               "src/favicon.ico",
               "src/assets"
             ],
-            "styles": [
-              "src/scss/style.scss"
-            ],
-            "scripts": [
-              "node_modules/jquery/dist/jquery.min.js",
-              "node_modules/bootstrap/dist/js/bootstrap.min.js"
-            ],
+            "styles": [],
+            "scripts": [],
             "karmaConfig": "karma.conf.js"
           }
         }
