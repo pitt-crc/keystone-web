@@ -4,6 +4,12 @@
 
 The frontend web interface for the Keystone allocation management dashboard.
 
+## Resources
+
+- [Keystone-API](): Backend REST API for managing HPC allocations and resources.
+- [Keystone-Web](): Website frontend for HPC administration and self-service.
+- [Keystone-Docs](): Documentation for the Keystone project and its components.
+
 ## Installation
 
 To install the Keystone web interface, choose from one of the following options.
