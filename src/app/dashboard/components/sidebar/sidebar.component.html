@@ -1,5 +1,6 @@
 <nav id="sidebar" class="sidebar">
   <div class="sidebar-content">
+
     <a class="sidebar-brand" href="index.html">
       <span class="align-middle">Keystone</span>
     </a>
@@ -11,11 +12,12 @@
         </li>
         <li *ngFor="let navItem of navSection.value | keyvalue" class="sidebar-item">
           <a class="sidebar-link" href="{{ navItem.value['href'] }}">
-            <bi name="{{ navItem.value['icon'] }}" ></bi>
+            <i class="bi bi-{{ navItem.value['icon'] }}"></i>
             <span class="align-middle">{{ navItem.key }}</span>
           </a>
         </li>
       </ng-container>
     </ul>
+
   </div>
 </nav>
