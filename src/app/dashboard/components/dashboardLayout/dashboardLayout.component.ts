@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from "@angular/router";
-import packageJson from '../../../../../package.json';
+
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-dashboardLayout',
@@ -11,5 +12,5 @@ import packageJson from '../../../../../package.json';
   templateUrl: 'dashboardLayout.component.html'
 })
 export class DashboardLayoutComponent {
-  version = packageJson.version;
+  version = environment.version;
 }

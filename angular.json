@@ -30,12 +30,9 @@
               "src/assets"
             ],
             "styles": [
-              "src/assets/scss/theme/style.scss"
+              "src/styles.scss"
             ],
-            "scripts": [],
-            "server": "src/main.server.ts",
-            "prerender": false,
-            "ssr": false
+            "scripts": []
           },
           "configurations": {
             "production": {

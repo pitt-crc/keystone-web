@@ -1,12 +1,5 @@
-/*!
- * AdminKit v3.4.0 (https://adminkit.io/)
- * Copyright 2023 Paul Laros
- * Copyright 2023 AdminKit
- * Licensed under MIT (https://github.com/adminkit/adminkit/blob/master/LICENSE)
- */
-
 // Variables
-@import "1-variables/app";
+@import "assets/scss/AdminKit/1-variables/app";
 
 // Bootstrap Configuration
 @import "bootstrap/scss/functions";
@@ -55,28 +48,28 @@
 @import "bootstrap/scss/utilities/api";
 
 // Theme mixins
-@import "2-mixins/button";
+@import "assets/scss/AdminKit/2-mixins/button";
 
 // Theme components
-@import "3-components/avatar";
-@import "3-components/buttons";
-@import "3-components/card";
-@import "3-components/chart";
-@import "3-components/content";
-@import "3-components/dropdown";
-@import "3-components/feather";
-@import "3-components/footer";
-@import "3-components/hamburger";
-@import "3-components/list-group";
-@import "3-components/main";
-@import "3-components/navbar";
-@import "3-components/reboot";
-@import "3-components/sidebar";
-@import "3-components/sizing";
-@import "3-components/stat";
-@import "3-components/tables";
-@import "3-components/type";
-@import "3-components/wrapper";
+@import "assets/scss/AdminKit/3-components/avatar";
+@import "assets/scss/AdminKit/3-components/buttons";
+@import "assets/scss/AdminKit/3-components/card";
+@import "assets/scss/AdminKit/3-components/chart";
+@import "assets/scss/AdminKit/3-components/content";
+@import "assets/scss/AdminKit/3-components/dropdown";
+@import "assets/scss/AdminKit/3-components/feather";
+@import "assets/scss/AdminKit/3-components/footer";
+@import "assets/scss/AdminKit/3-components/hamburger";
+@import "assets/scss/AdminKit/3-components/list-group";
+@import "assets/scss/AdminKit/3-components/main";
+@import "assets/scss/AdminKit/3-components/navbar";
+@import "assets/scss/AdminKit/3-components/reboot";
+@import "assets/scss/AdminKit/3-components/sidebar";
+@import "assets/scss/AdminKit/3-components/sizing";
+@import "assets/scss/AdminKit/3-components/stat";
+@import "assets/scss/AdminKit/3-components/tables";
+@import "assets/scss/AdminKit/3-components/type";
+@import "assets/scss/AdminKit/3-components/wrapper";
 
 // Theme utilities
-@import "4-utilities/cursors";
+@import "assets/scss/AdminKit/4-utilities/cursors";

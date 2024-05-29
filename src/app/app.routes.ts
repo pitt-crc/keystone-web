@@ -8,11 +8,11 @@ import { authGuard } from "./common/guards/authGuard";
 import { DashboardLayoutComponent } from "./dashboard/components/dashboardLayout/dashboardLayout.component";
 
 export const routes: Routes = [
-    {path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-    {path: 'dashboard', component: DashboardLayoutComponent, canActivate: [authGuard]},
-    {path: 'auth', component: AuthLayoutComponent, children: [
-        {path: 'login', component: LoginComponent},
-        {path: 'logout', component: LogoutComponent},
+  {path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+  {path: 'dashboard', component: DashboardLayoutComponent, canActivate: [authGuard]},
+  {path: 'auth', component: AuthLayoutComponent, children: [
+      {path: 'login', component: LoginComponent},
+      {path: 'logout', component: LogoutComponent},
     ]},
-    {path: '**', component: PageNotFoundComponent},
+  {path: '**', component: PageNotFoundComponent},
 ];
