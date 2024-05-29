@@ -12,7 +12,7 @@
         </li>
         <li *ngFor="let navItem of navSection.value | keyvalue" class="sidebar-item">
           <a class="sidebar-link" href="{{ navItem.value['href'] }}">
-            <i class="bi bi-{{ navItem.value['icon'] }}"></i>
+            <i class="bi bi-{{ navItem.value['icon'] }} align-middle"></i>
             <span class="align-middle">{{ navItem.key }}</span>
           </a>
         </li>
