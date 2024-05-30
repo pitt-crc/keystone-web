@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { KeyValuePipe, NgForOf } from "@angular/common";
+import { environment } from "../../../../environments/environment";
 
 @Component({
   selector: 'app-sidebar',
@@ -8,6 +9,7 @@ import { KeyValuePipe, NgForOf } from "@angular/common";
   templateUrl: 'sidebar.component.html',
 })
 export class SidebarComponent {
+  version: string = environment.version;
   navStructure: NavStructure = {
     Overview: {
       Dashboard: {href: 'dashboard', icon: 'speedometer'},
