@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
    */
   ngOnInit(): void {
     if (this.apiService.isAuthenticated()) {
-      this.redirectSuccessfulLogin();
+      this.handleSuccessfulLogin();
     }
   }
 
@@ -37,10 +37,10 @@ export class LoginComponent implements OnInit {
     this.disableSubmitButton();
     this.apiService.login(this.username, this.password).subscribe({
       next: (): void => {
-        this.redirectSuccessfulLogin();
+        this.handleSuccessfulLogin();
       },
       error: (): void => {
-        this.displayErrorMessage();
+        this.handleUnsuccessfulLogin();
       }
     });
     this.enableSubmitButton();
@@ -49,15 +49,16 @@ export class LoginComponent implements OnInit {
   /**
    * Redirect the user to the home page upon successful login.
    */
-  private redirectSuccessfulLogin(): void {
+  private handleSuccessfulLogin(): void {
     this.router.navigateByUrl('');
   }
 
   /**
    * Display a friendly error message indicating invalid login credentials
    */
-  private displayErrorMessage(): void {
+  private handleUnsuccessfulLogin(): void {
     this.errorMessage = "Invalid credentials. Please try again.";
+    this.password = "";
   }
 
   /**
