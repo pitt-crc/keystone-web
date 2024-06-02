@@ -4,11 +4,13 @@ import { RouterOutlet } from "@angular/router";
 import { environment } from '../../../../environments/environment';
 import { KeyValuePipe, NgForOf } from "@angular/common";
 import { TopNavComponent } from "../topNav/topNav.component";
+import { SideNavComponent } from "../sideNav/sideNav.component";
 @Component({
   selector: 'app-dashboardLayout',
   standalone: true,
-  imports: [RouterOutlet, KeyValuePipe, NgForOf, TopNavComponent],
+  imports: [RouterOutlet, KeyValuePipe, NgForOf, TopNavComponent, SideNavComponent],
   templateUrl: 'dashboardLayout.component.html',
+  styleUrl: 'dashboardLayout.component.scss'
 })
 export class DashboardLayoutComponent {
   version = environment.version;
