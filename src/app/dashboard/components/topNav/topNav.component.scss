@@ -1,15 +1,3 @@
 .navbar {
   height: 3.5rem;
 }
-
-@media (max-width: 576px) {
-  .navbar .navbar-brand {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-  }
-}
-
-.dropdown {
-  z-index: 1000;
-}
