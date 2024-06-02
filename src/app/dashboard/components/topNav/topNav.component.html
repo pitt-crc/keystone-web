@@ -1,27 +1,31 @@
 <nav class="navbar navbar-expand-lg bg-white border-bottom fixed-top px-3">
   <div class="container-fluid">
 
-    <!-- Navbar toggler button for mobile view -->
+    <!-- Navbar toggle button for mobile view -->
     <button class="navbar-toggler" type="button" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <i class="bi bi-list"></i>
     </button>
 
     <!-- Navbar brand (logo) -->
-    <a class="navbar-brand" href="#">Keystone</a>
+    <a class="navbar-brand" href="/">Keystone</a>
 
     <!-- Navbar user dropdown -->
     <ul class="navbar-nav">
       <li class="nav-item dropdown">
         <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser" data-bs-toggle="dropdown" aria-expanded="false">
-          <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
+          <img ngSrc="https://github.com/mdo.png" alt="user" width="32" height="32" class="rounded-circle">
         </a>
         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownUser">
-          <li><a class="dropdown-item" href="#">Profile</a></li>
-          <li><a class="dropdown-item" href="#">Settings</a></li>
+          <li>
+            <a class="dropdown-item" href="#"><i class="bi bi-person"></i> Profile</a>
+          </li>
+          <a class="dropdown-item" href="#"><i class="bi bi-gear"></i> Settings</a>
           <li>
             <hr class="dropdown-divider">
           </li>
-          <li><a class="dropdown-item" href="#">Sign Out</a></li>
+          <li>
+            <a class="dropdown-item" href="#"><i class="bi bi-box-arrow-right"></i> Sign Out</a>
+          </li>
         </ul>
       </li>
     </ul>

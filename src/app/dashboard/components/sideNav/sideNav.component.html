@@ -1,16 +1,20 @@
 <div class="sidebar">
   <div class="d-flex flex-column flex-shrink-0 p-4">
+
     <!-- Sidebar navigation links -->
     <ng-container *ngFor="let navSection of navStructure">
-      <div class="sidebar-section-title">{{ navSection.title }}</div>
+      <div class="sidebar-section-title">
+        {{ navSection.title }}
+      </div>
       <ul class="nav nav-pills flex-column mb-4">
-        <li class="nav-item" *ngFor="let navItem of navSection.links | keyvalue">
-          <a [href]="navItem.value.href" class="nav-link">
-            <i class="bi bi-{{ navItem.value.icon }} align-middle"></i>
-            <span class="align-middle m-2">{{ navItem.key }}</span>
+        <li class="nav-item" *ngFor="let navItem of navSection.links">
+          <a [href]="navItem.href" class="nav-link">
+            <i class="bi bi-{{ navItem.icon }} align-middle"></i>
+            <span class="align-middle m-2">{{ navItem.text }}</span>
           </a>
         </li>
       </ul>
     </ng-container>
+
   </div>
 </div>
