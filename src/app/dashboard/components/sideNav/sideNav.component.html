@@ -1,48 +1,24 @@
 <div class="sidebar">
   <div class="d-flex flex-column flex-shrink-0 p-3">
+
+    <!-- Sidebar navigation links -->
     <ul class="nav nav-pills flex-column mb-auto">
-      <li class="nav-header">Overview</li>
-      <li class="nav-item">
-        <a href="#" class="nav-link active" aria-current="page">
-          <i class="bi bi-speedometer"></i>
-          Dashboard
-        </a>
-      </li>
-      <li class="nav-header">Compute Resources</li>
-      <li>
-        <a href="#" class="nav-link">
-          <i class="bi bi-arrow-clockwise"></i>
-          Allocation Requests
-        </a>
-      </li>
-      <li>
-        <a href="#" class="nav-link">
-          <i class="bi bi-bar-chart"></i>
-          Resource Usage
-        </a>
-      </li>
-      <li>
-        <a href="#" class="nav-link">
-          <i class="bi bi-coin"></i>
-          Job History
-        </a>
-      </li>
-      <li class="nav-header">Research Products</li>
-      <li>
-        <a href="#" class="nav-link">
-          <i class="bi bi-journal-text"></i>
-          Publications
-        </a>
-      </li>
-      <li>
-        <a href="#" class="nav-link">
-          <i class="bi bi-coin"></i>
-          Grants
-        </a>
-      </li>
+      <ng-container *ngFor="let navSection of navStructure">
+        <li>
+          {{ navSection['title'] }}
+        </li>
+        <li *ngFor="let navItem of navSection['links'] | keyvalue">
+          <a href="{{ navItem.value['href'] }}" class="nav-link">
+            <i class="bi bi-{{ navItem.value['icon'] }} align-middle"></i>
+            <span class="align-middle">{{ navItem.key }}</span>
+          </a>
+        </li>
+      </ng-container>
     </ul>
+
+    <!-- Sidebar footer -->
     <hr>
-    <div class="sidenav-footer">
+    <div>
       {{ version }}
     </div>
   </div>
