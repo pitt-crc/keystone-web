@@ -3,10 +3,20 @@ $sidebar-bg-dark: #31405d;
 
 .sidebar {
   position: absolute;
-  top: 3.5rem;
+  top: 3.5rem; /* Adjust for the top nav bar */
   width: 16rem;
-  height: calc(100% - 3.5rem); /* Adjusting for the top offset */
+  height: calc(100% - 3.5rem);
   background-color: $sidebar-bg-dark;
+  transform: translateX(-100%); /* Initially hide the sidebar */
+  transition: transform 0.3s ease-in-out;
+
+  &.active {
+    transform: translateX(0); /* Show the sidebar when active */
+  }
+
+  @media (min-width: 992px) {
+    transform: translateX(0); /* Always show the sidebar on larger screens */
+  }
 }
 
 .sidebar-section-title {

@@ -21,6 +21,7 @@ interface NavSection {
   styleUrl: 'sideNav.component.scss'
 })
 export class SideNavComponent {
+  isActive: boolean = false;
   navStructure: NavSection[] = [
     {
       title: 'Overview',
