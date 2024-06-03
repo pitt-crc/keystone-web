@@ -1,9 +1,9 @@
+import { CommonModule } from "@angular/common";
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from "@angular/router";
-import { CommonModule } from "@angular/common";
 
-import { ApiService } from "../../../common/services/api.service";
+import { ApiService } from "../../../core/services/api.service";
 
 @Component({
   selector: 'app-login',
@@ -12,12 +12,12 @@ import { ApiService } from "../../../common/services/api.service";
   templateUrl: 'login.component.html',
 })
 export class LoginComponent implements OnInit {
-  username = '';
-  password = '';
-  errorMessage = '';
-  submitButtonText = 'Sign In';
-  submitButtonEnabled = true;
-  showSubmitSpinner = false;
+  username: string = '';
+  password: string = '';
+  errorMessage: string = '';
+  submitButtonText: string = 'Sign In';
+  submitButtonEnabled: boolean = true;
+  showSubmitSpinner: boolean = false;
 
   constructor(private apiService: ApiService, private router: Router) {}
 
@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
   }
 
   /**
-   * Pass user provided credentials to th backend API and handle the authentication result.
+   * Pass user provided credentials to the backend API and handle the authentication result.
    */
   onSubmit(): void {
     this.disableSubmitButton();

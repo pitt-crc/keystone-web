@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
 
-import { ApiService } from "../../../common/services/api.service";
+import { ApiService } from "../../../core/services/api.service";
 
 @Component({
   selector: 'app-logout',
