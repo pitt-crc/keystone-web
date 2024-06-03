@@ -1,7 +1,8 @@
 @import "variables";
 
 .sidebar {
-  position: absolute;
+  position: fixed;
+  overflow: auto;
   top: $topnav-height;
   width: $sidebar-width;
   height: calc(100% - $topnav-height);
