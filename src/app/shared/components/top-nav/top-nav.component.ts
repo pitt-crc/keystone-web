@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
 import { NgOptimizedImage } from "@angular/common";
+import { Component } from '@angular/core';
+
 import { SideNavService } from "../../services/sidenav.service";
 
 @Component({
@@ -14,7 +15,7 @@ import { SideNavService } from "../../services/sidenav.service";
 export class TopNavComponent {
   constructor(private sideNavService: SideNavService) {}
 
-  toggleSidebar() {
+  toggleSidebar(): void {
     this.sideNavService.toggleSidebar();
   }
 }
