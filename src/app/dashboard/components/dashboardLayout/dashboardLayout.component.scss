@@ -1,4 +1,6 @@
+@import "variables";
+
 main {
-  padding-top: 4.5rem;
-  padding-left: 18rem;
+  padding-top: $topnav-height + 1.5rem;
+  padding-left: $sidebar-width + 2rem;
 }

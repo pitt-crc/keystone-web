@@ -1,5 +1,7 @@
+@import "variables";
+
 .navbar {
-  height: 3.5rem;
+  height: $topnav-height;
 }
 
 .navbar-brand {

@@ -1,11 +1,10 @@
-$sidebar-bg-light: #e2e6ea;
-$sidebar-bg-dark: #31405d;
+@import "variables";
 
 .sidebar {
   position: absolute;
-  top: 3.5rem; /* Adjust for the top nav bar */
-  width: 16rem;
-  height: calc(100% - 3.5rem);
+  top: $topnav-height;
+  width: $sidebar-width;
+  height: calc(100% - $topnav-height);
   background-color: $sidebar-bg-dark;
   transform: translateX(-100%); /* Initially hide the sidebar */
   transition: transform 0.3s ease-in-out;
