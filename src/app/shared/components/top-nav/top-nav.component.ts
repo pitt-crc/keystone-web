@@ -15,6 +15,9 @@ import { SideNavService } from "../../services/sidenav.service";
 export class TopNavComponent {
   constructor(private sideNavService: SideNavService) {}
 
+  /**
+   * Toggles the sidebar visibility when called.
+   */
   toggleSidebar(): void {
     this.sideNavService.toggleSidebar();
   }

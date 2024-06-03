@@ -13,8 +13,6 @@ export class PageNotFoundComponent {
 
   /**
    * Navigate the user to the home page.
-   *
-   * @returns A Promise that resolves to a boolean indicating if navigation was successful.
    */
   goHome(): void {
     this.router.navigateByUrl('');

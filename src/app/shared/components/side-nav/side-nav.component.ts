@@ -50,6 +50,9 @@ export class SideNavComponent implements OnInit {
 
   constructor(private sideNavService: SideNavService) {}
 
+  /**
+   * Subscribes to the sidebar visibility state changes and updates isActive accordingly.
+   */
   ngOnInit(): void {
     this.sideNavService.sidebarVisible$.subscribe(visible => {
       this.isActive = visible;

@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
   }
 
   /**
-   * Pass user provided credentials to th backend API and handle the authentication result.
+   * Pass user provided credentials to the backend API and handle the authentication result.
    */
   onSubmit(): void {
     this.disableSubmitButton();
