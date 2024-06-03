@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 
-import { NgForOf } from "@angular/common";
+import { NgForOf, NgOptimizedImage } from "@angular/common";
+import { RouterLink } from "@angular/router";
 
 interface NavLink {
   text: string;
@@ -16,7 +17,7 @@ interface NavSection {
 @Component({
   selector: 'app-side-nav',
   standalone: true,
-  imports: [NgForOf],
+  imports: [NgForOf, NgOptimizedImage, RouterLink],
   templateUrl: 'sideNav.component.html',
   styleUrl: 'sideNav.component.scss'
 })
