@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { NgForOf, NgOptimizedImage } from "@angular/common";
 import { RouterLink } from "@angular/router";
+import { SideNavService } from "../../services/sidenav.service";
 
 interface NavLink {
   text: string;
@@ -21,7 +22,7 @@ interface NavSection {
   templateUrl: 'sideNav.component.html',
   styleUrl: 'sideNav.component.scss'
 })
-export class SideNavComponent {
+export class SideNavComponent implements OnInit{
   isActive: boolean = false;
   navStructure: NavSection[] = [
     {
@@ -46,4 +47,12 @@ export class SideNavComponent {
       ]
     }
   ];
+
+  constructor(private sideNavService: SideNavService) {}
+
+  ngOnInit() {
+    this.sideNavService.sidebarVisible$.subscribe(visible => {
+      this.isActive = visible;
+    });
+  }
 }
