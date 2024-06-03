@@ -2,12 +2,12 @@ import { Component } from '@angular/core';
 import { NgOptimizedImage } from "@angular/common";
 
 @Component({
-  selector: 'app-topNav',
+  selector: 'app-top-nav',
   standalone: true,
-  templateUrl: 'topNav.component.html',
+  templateUrl: 'top-nav.component.html',
   imports: [
     NgOptimizedImage
   ],
-  styleUrl: 'topNav.component.scss'
+  styleUrl: 'top-nav.component.scss'
 })
 export class TopNavComponent {}

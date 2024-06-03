@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 import { RouterOutlet } from "@angular/router";
 
 @Component({
-  selector: 'app-auth-layout',
+  selector: 'app-center-page-layout',
   standalone: true,
   imports: [RouterOutlet],
-  templateUrl: 'auth-layout.component.html',
+  templateUrl: 'center-page-layout.component.html',
 })
-export class AuthLayoutComponent {}
+export class CenterPageLayoutComponent {}

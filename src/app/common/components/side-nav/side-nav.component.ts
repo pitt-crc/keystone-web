@@ -14,7 +14,7 @@ interface NavSection {
 }
 
 @Component({
-  selector: 'app-sideNav',
+  selector: 'app-side-nav',
   standalone: true,
   imports: [NgForOf],
   templateUrl: 'sideNav.component.html',
