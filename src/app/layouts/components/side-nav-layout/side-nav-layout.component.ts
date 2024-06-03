@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from "@angular/router";
-import { TopNavComponent } from "../top-nav/top-nav.component";
-import { SideNavComponent } from "../side-nav/side-nav.component";
+import { TopNavComponent } from "../../../shared/components/top-nav/top-nav.component";
+import { SideNavComponent } from "../../../shared/components/side-nav/side-nav.component";
 
 @Component({
   selector: 'app-dashboard-layout',
