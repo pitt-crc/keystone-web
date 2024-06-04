@@ -1,0 +1,40 @@
+<ul class="navbar-nav">
+  <li class="nav-item dropdown">
+    <a href="#" class="d-block link-dark text-decoration-none" id="dropdownSettings" data-bs-toggle="dropdown" aria-expanded="false">
+      <i class="bi bi-gear h4"></i>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownSettings">
+      <li>
+        <a routerLink="" class="dropdown-item" href="#">
+          <i class="bi bi-person align-middle"></i>
+          <span class="align-middle m-2">Profile</span>
+        </a>
+      </li>
+      <li>
+        <a routerLink="" class="dropdown-item" href="#">
+          <i class="bi bi-envelope align-middle"></i>
+          <span class="align-middle m-2">Notifications</span>
+          <span *ngIf="notificationBadgeText !== '0'" class="badge rounded-pill bg-danger px-2">
+            {{ notificationBadgeText }}
+            <span class="visually-hidden">unread messages</span>
+          </span>
+        </a>
+      </li>
+      <li>
+        <a routerLink="" class="dropdown-item" href="#">
+          <i class="bi bi-gear align-middle"></i>
+          <span class="align-middle m-2">Settings</span>
+        </a>
+      </li>
+      <li>
+        <hr class="dropdown-divider">
+      </li>
+      <li>
+        <a routerLink="/auth/logout/" class="dropdown-item" href="#">
+          <i class="bi bi-box-arrow-right align-middle"></i>
+          <span class="align-middle m-2">Sign Out</span>
+        </a>
+      </li>
+    </ul>
+  </li>
+</ul>
