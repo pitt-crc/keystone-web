@@ -4,11 +4,12 @@ import { FormsModule } from '@angular/forms';
 import { Router } from "@angular/router";
 
 import { ApiService } from "../../../core/services/api.service";
+import { LayoutCenterPageComponent } from "../../../layouts/components/layout-center-page/layout-center-page.component";
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, LayoutCenterPageComponent],
   templateUrl: 'login.component.html',
 })
 export class LoginComponent implements OnInit {

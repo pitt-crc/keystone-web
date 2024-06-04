@@ -28,7 +28,7 @@ export class SideNavComponent implements OnInit {
     {
       title: 'Overview',
       links: [
-        {text: 'Dashboard', href: 'dashboard', icon: 'speedometer'},
+        {text: 'Dashboard', href: '/app', icon: 'speedometer'},
       ]
     },
     {
