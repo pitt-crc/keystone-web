@@ -1,8 +1,7 @@
 @import "../../../../assets/scss/variables";
 
 main {
-  padding-top: $topnav-height + 1.5rem;
-  padding-left: 2rem;
+  padding: $topnav-height + 1.5rem 2rem 2rem;
   transition: padding-left 0.3s ease-in-out;
 
   @media (min-width: 992px) {
