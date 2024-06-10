@@ -4,9 +4,7 @@ WORKDIR /build
 COPY . .
 
 # Install dependencies and build the application
-RUN npm install &&  \
-    npm install -g @angular/cli && \
-    ng build
+RUN npm install && npm run build
 
 FROM nginx:1.25-alpine
 
