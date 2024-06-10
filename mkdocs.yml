@@ -1,0 +1,4 @@
+site_name: Keystone Web
+nav:
+  - Introduction: index.md
+  - installation.md
