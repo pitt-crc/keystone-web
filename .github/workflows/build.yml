@@ -1,0 +1,71 @@
+name: 🤖 Build
+
+on:
+  workflow_call:
+    inputs:
+      version:
+        description: 'Set the version number of the compiled application.'
+        default: '0.0.0'
+        required: false
+        type: string
+
+jobs:
+  build-docker:
+    name: Docker Image
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Set package version
+        run: npm version --allow-same-version --git-tag-version false "${{ inputs.version }}"
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          tags: keystone-web:latest
+          outputs: type=docker,dest=/tmp/keystone-web.tar
+
+      - name: Upload image artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: keystone-web-docker
+          path: /tmp/keystone-web.tar
+
+  buld-dist:
+    name: Source Distribution
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Set package version
+        run: npm version --allow-same-version --git-tag-version false "${{ inputs.version }}"
+
+      - name: Build Angular project
+        run: npm run build
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: keystone-web-dist
+          path: dist

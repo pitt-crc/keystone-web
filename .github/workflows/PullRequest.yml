@@ -4,12 +4,18 @@ on:
   pull_request:
 
 jobs:
+  build:
+    name: Build
+    uses: ./.github/workflows/Build.yml
+
   test:
     name: Test
+    needs: build
     uses: ./.github/workflows/Test.yml
 
   qa:
     name: QA
+    needs: build
     uses: ./.github/workflows/QA.yml
     secrets: inherit
 
