@@ -2,9 +2,13 @@
   <h1 class="h3">Rotational Energies In Nearby Satellite Galaxies <span class="text-secondary">(#1425)</span></h1>
 
   <div class="row my-4">
-    <div class="col-4">
+    <div class="col-lg-4 mx-lg-3">
       <table class="table table-borderless table-sm align-middle">
         <tbody>
+        <tr>
+          <td style="width: 9rem"><strong>Status:</strong></td>
+          <td>Pending</td>
+        </tr>
         <tr>
           <td style="width: 9rem"><strong>Research Group:</strong></td>
           <td>DJPerrefort</td>
@@ -24,14 +28,14 @@
         </tbody>
       </table>
     </div>
-    <div class="col-8">
+    <div class="col-lg-7 mx-lg-3">
       <table class="table">
         <thead>
         <tr>
-          <th scope="col">Cluster</th>
-          <th scope="col">Requested SUs</th>
-          <th scope="col">Awarded SUs</th>
-          <th scope="col">Utilized SUs</th>
+          <th class="pt-0" scope="col">Cluster</th>
+          <th class="pt-0" scope="col">Requested SUs</th>
+          <th class="pt-0" scope="col">Awarded SUs</th>
+          <th class="pt-0" scope="col">Utilized SUs</th>
         </tr>
         </thead>
         <tbody>
@@ -52,16 +56,73 @@
     </div>
   </div>
 
+  <div class="card" style="display: none">
+
+    <div class="card-body">
+      <h5>Review Allocation Request</h5>
+      <p>General instructions for admins go in this paragraph.</p>
+      <form>
+        <div class="mb-3 d-flex align-items-center">
+          <label class="form-label me-2 align-middle" for="status">Status</label>
+          <select class="form-select" id="status" name="status">
+            <option value="approved" selected>Approve</option>
+            <option value="denied">Deny</option>
+          </select>
+        </div>
+        <table class="table">
+          <thead>
+          <tr>
+            <th class="pt-0" scope="col">Cluster</th>
+            <th class="pt-0" scope="col">Requested SUs</th>
+            <th class="pt-0" scope="col">Awarded SUs</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>MPI</td>
+            <td>100,000</td>
+            <td><input type="text" class="form-control" id="mpi_awarded_su" name="mpi_awarded_su" placeholder="Enter awarded SUs"></td>
+          </tr>
+          <tr>
+            <td>SMP</td>
+            <td>150,000</td>
+            <td><input type="text" class="form-control" id="smp_awarded_su" name="smp_awarded_su" placeholder="Enter awarded SUs"></td>
+          </tr>
+          <tr>
+            <td>HTC</td>
+            <td>0</td>
+            <td><input type="text" class="form-control" id="htc_awarded_su" name="htc_awarded_su" placeholder="Enter awarded SUs"></td>
+          </tr>
+          <tr>
+            <td>GPU</td>
+            <td>0</td>
+            <td><input type="text" class="form-control" id="gpu_awarded_su" name="gpu_awarded_su" placeholder="Enter awarded SUs"></td>
+          </tr>
+          </tbody>
+        </table>
+        <div class="mb-3">
+          <textarea class="form-control" id="review" rows="3" placeholder="Enter your comments here"></textarea>
+        </div>
+        <div class="text-end">
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+
+
+
   <div class="row my-4">
     <ul class="nav nav-tabs" id="myTab" role="tablist">
       <li class="nav-item" role="presentation">
-        <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Home</button>
+        <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Submission</button>
       </li>
       <li class="nav-item" role="presentation">
         <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Historical Usage</button>
       </li>
       <li class="nav-item" role="presentation">
-        <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Reviewer Comments</button>
+        <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Discussion (2)</button>
       </li>
     </ul>
     <div class="tab-content" id="myTabContent">
@@ -87,8 +148,39 @@
           </div>
         </div>
       </div>
+
       <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">...</div>
-      <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
+      <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+        <div class="card my-3">
+          <div class="card-body">
+            Gerald Ford
+            <span class="float-end text-muted"><i class="bi bi-clock mx-1"></i> June 20th, 3:45 PM</span><br>
+            <p class="card-text my-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque iaculis tristique dolor, tincidunt auctor est aliquet ac. Vestibulum a feugiat turpis. Sed interdum lorem sed finibus facilisis. Nam sagittis, lacus a porta semper, lacus dolor dapibus eros, quis tempus velit sapien feugiat odio. Morbi a augue nec risus scelerisque pretium in vel neque. Curabitur fermentum neque in dolor egestas, sit amet vehicula nisi ultrices. Donec pulvinar, enim quis imperdiet pellentesque, mi mauris eleifend enim, et tempus tortor tellus quis tellus. Maecenas euismod diam id libero mollis, non auctor libero facilisis. Donec in metus magna. Suspendisse sit amet consectetur lacus. Maecenas nec convallis magna, consequat sodales nisi.</p>
+          </div>
+        </div>
+
+        <div class="card my-3">
+          <div class="card-body">
+            Gerald Ford
+            <span class="float-end text-muted"><i class="bi bi-clock mx-1"></i> June 20th, 3:45 PM</span><br>
+            <p class="card-text my-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque iaculis tristique dolor, tincidunt auctor est aliquet ac. Vestibulum a feugiat turpis. Sed interdum lorem sed finibus facilisis. Nam sagittis, lacus a porta semper, lacus dolor dapibus eros, quis tempus velit sapien feugiat odio. Morbi a augue nec risus scelerisque pretium in vel neque. Curabitur fermentum neque in dolor egestas, sit amet vehicula nisi ultrices. Donec pulvinar, enim quis imperdiet pellentesque, mi mauris eleifend enim, et tempus tortor tellus quis tellus. Maecenas euismod diam id libero mollis, non auctor libero facilisis. Donec in metus magna. Suspendisse sit amet consectetur lacus. Maecenas nec convallis magna, consequat sodales nisi.</p>
+          </div>
+        </div>
+
+        <hr>
+
+        <div class=" my-3">
+          <form>
+            <div class="mb-3">
+              <textarea class="form-control" id="comments" rows="3" placeholder="Enter your comments here"></textarea>
+            </div>
+            <div class="text-end">
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+          </form>
+        </div>
+
+      </div>
     </div>
   </div>
 
