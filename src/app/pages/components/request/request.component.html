@@ -1,8 +1,18 @@
 <app-layout-side-nav>
 
+  <!-- Header section -->
   <div class="row">
     <div class="col">
-      <h1 class="h3">Rotational Energies In Nearby Satellite Galaxies <span class="text-secondary">(Pending)</span></h1>
+      <h1 class="h3">{{ requestTitle }}
+        <span class="badge rounded-pill" [ngClass]="{
+        'bg-secondary': requestStatus === 'Pending',
+        'bg-warning': requestStatus === 'Approved',
+        'bg-success': requestStatus === 'Active',
+        'bg-danger': requestStatus === 'Denied'
+      }">
+        {{ requestStatus }}
+      </span>
+      </h1>
     </div>
     <div class="col-xl-auto text-xl-end">
       <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#reviewModal">
@@ -11,11 +21,12 @@
     </div>
   </div>
 
-  <!-- Modal -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="reviewModalLabel" aria-hidden="true">
+  <!-- Modal for submitting review -->
+  <div class="modal fade" id="reviewModal" tabindex="-1" aria-labelledby="reviewModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
+          <!-- Modal Title -->
           <h5 class="modal-title" id="reviewModalLabel">Submit Review</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
@@ -81,6 +92,7 @@
     </div>
   </div>
 
+  <!-- Submission details section -->
   <div class="card my-4">
     <div class="card-header">
       <h2 class="h6 my-1">Submission Details</h2>
@@ -92,15 +104,15 @@
             <tbody>
             <tr>
               <td style="width: 8rem;"><strong>ID Number:</strong></td>
-              <td>#12345</td>
+              <td>#{{ requestID }}</td>
             </tr>
             <tr>
               <td><strong>Submitted:</strong></td>
-              <td>June 24, 2024</td>
+              <td>{{ requestDate | date }}</td>
             </tr>
             <tr>
               <td><strong>Group Name:</strong></td>
-              <td>DJPerrefort</td>
+              <td>{{ requestGroup }}</td>
             </tr>
             </tbody>
           </table>
@@ -110,15 +122,15 @@
             <tbody>
             <tr>
               <td style="width: 8rem;"><strong>Submitted by:</strong></td>
-              <td>Daniel Perrefort</td>
+              <td>{{ submitterGroup }}</td>
             </tr>
             <tr>
               <td><strong>Department:</strong></td>
-              <td>Dept. of Physics and Astronomy</td>
+              <td>{{ submitterDepartment }}</td>
             </tr>
             <tr>
               <td><strong>Role/Position:</strong></td>
-              <td>Faculty</td>
+              <td>{{ submitterPosition }}</td>
             </tr>
             </tbody>
           </table>
@@ -128,15 +140,24 @@
             <tbody>
             <tr>
               <td style="width: 8rem;"><strong>Reviewed On:</strong></td>
-              <td>N/A</td>
+              <td>
+                <span *ngIf="reviewedDate; else noReviewedDate">{{ reviewedDate | date }}</span>
+                <ng-template #noReviewedDate>N/A</ng-template>
+              </td>
             </tr>
             <tr>
               <td><strong>Start Date:</strong></td>
-              <td>N/A</td>
+              <td>
+                <span *ngIf="startDate; else noStartDate">{{ startDate | date }}</span>
+                <ng-template #noStartDate>N/A</ng-template>
+              </td>
             </tr>
             <tr>
               <td><strong>End Date:</strong></td>
-              <td>N/A</td>
+              <td>
+                <span *ngIf="endDate; else noEndDate">{{ endDate | date }}</span>
+                <ng-template #noEndDate>N/A</ng-template>
+              </td>
             </tr>
             </tbody>
           </table>
@@ -145,7 +166,7 @@
     </div>
   </div>
 
-
+  <!-- Requested resources section -->
   <div class="card my-4">
     <div class="card-header">
       <h2 class="h6 my-1">Requested Resources</h2>
@@ -164,23 +185,20 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
-          <td>MPI</td>
-          <td>100,000</td>
-          <td>--</td>
+        <tr *ngFor="let data of clusterData">
+          <td>{{ data.cluster }}</td>
+          <td>{{ data.requestedSUs | number }}</td>
+          <td>{{ data.awardedSUs }}</td>
           <td>
             <div class="progress">
-              <div class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td>SMP</td>
-          <td>150,000</td>
-          <td>--</td>
-          <td>
-            <div class="progress">
-              <div class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+              <div
+                  class="progress-bar"
+                  role="progressbar"
+                  [style.width.%]="data.utilization"
+                  [attr.aria-valuenow]="data.utilization"
+                  aria-valuemin="0"
+                  aria-valuemax="100">
+              </div>
             </div>
           </td>
         </tr>
@@ -189,7 +207,9 @@
     </div>
   </div>
 
+  <!-- Tabbed section for Justification, Insights, and Discussion -->
   <div class="row my-4">
+    <!-- Tab selectors -->
     <ul class="nav nav-tabs" id="myTab" role="tablist">
       <li class="nav-item" role="presentation">
         <button class="nav-link active" id="justification-tab" data-bs-toggle="tab" data-bs-target="#justification" type="button" role="tab" aria-controls="justification" aria-selected="true">Justification</button>
@@ -202,9 +222,10 @@
       </li>
     </ul>
 
+    <!-- Tab content -->
     <div class="tab-content" id="myTabContent">
+      <!-- Justification tab content -->
       <div class="tab-pane fade show active" id="justification" role="tabpanel" aria-labelledby="justification-tab">
-
         <div class="card my-3">
           <div class="card-body">
             <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque iaculis tristique dolor, tincidunt auctor est aliquet ac. Vestibulum a feugiat turpis. Sed interdum lorem sed finibus facilisis. Nam sagittis, lacus a porta semper, lacus dolor dapibus eros, quis tempus velit sapien feugiat odio. Morbi a augue nec risus scelerisque pretium in vel neque. Curabitur fermentum neque in dolor egestas, sit amet vehicula nisi ultrices. Donec pulvinar, enim quis imperdiet pellentesque, mi mauris eleifend enim, et tempus tortor tellus quis tellus. Maecenas euismod diam id libero mollis, non auctor libero facilisis. Donec in metus magna. Suspendisse sit amet consectetur lacus. Maecenas nec convallis magna, consequat sodales nisi.</p>
@@ -220,10 +241,12 @@
         </div>
       </div>
 
+      <!-- Insights tab content -->
       <div class="tab-pane fade" id="insights" role="tabpanel" aria-labelledby="insights-tab">
         ...
       </div>
 
+      <!-- discussion tab content -->
       <div class="tab-pane fade" id="discussion" role="tabpanel" aria-labelledby="discussion-tab">
         <div class="card my-3">
           <div class="card-body">
@@ -243,7 +266,8 @@
 
         <hr>
 
-        <div class=" my-3">
+        <!-- Discussion Comment Form -->
+        <div class="my-3">
           <form>
             <div class="mb-3">
               <textarea class="form-control" id="comments" rows="3" placeholder="Enter your comments here"></textarea>
