@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { jwtDecode } from "jwt-decode";
-import { finalize, map, Observable, of } from 'rxjs';
+import { catchError, finalize, map, Observable, of } from 'rxjs';
 
 import { environment } from '../../../environments/environment';
 
@@ -106,8 +106,8 @@ export class ApiService {
       return of(void 0);
     }
 
-    return this.http.post(this.blacklistEndpoint.href, {refresh: this.refreshToken}).pipe(
-      map(() => {}),
+    return this.http.post<void>(this.blacklistEndpoint.href, { refresh: this.refreshToken }).pipe(
+      catchError(err => of(void 0)),
       finalize(() => {
         this.clearTokens();
       })
@@ -119,7 +119,7 @@ export class ApiService {
    * @returns true if the user is authenticated, false otherwise
    */
   public isAuthenticated(): boolean {
-    this.refreshAuthTokens();
+    this.refreshOrClearTokens();
     return !!this.refreshToken;
   }
 
@@ -129,7 +129,7 @@ export class ApiService {
    * @returns An observable of the request
    */
   public get(endpoint: string): Observable<object> {
-    this.refreshAuthTokens();
+    this.refreshOrClearTokens();
     const url = new URL(endpoint, this.apiURL);
     return this.http.get(url.href, {headers: this.getAuthHeaders()});
   }
@@ -141,7 +141,7 @@ export class ApiService {
    * @returns An observable of the request
    */
   public post(endpoint: string, data: object): Observable<object> {
-    this.refreshAuthTokens();
+    this.refreshOrClearTokens();
     const url = new URL(endpoint, this.apiURL);
     return this.http.post(url.href, data, {headers: this.getAuthHeaders()});
   }
@@ -153,7 +153,7 @@ export class ApiService {
    * @returns An observable of the request
    */
   public put(endpoint: string, data: object): Observable<object> {
-    this.refreshAuthTokens();
+    this.refreshOrClearTokens();
     const url = new URL(endpoint, this.apiURL);
     return this.http.put(url.href, data, {headers: this.getAuthHeaders()});
   }
@@ -165,7 +165,7 @@ export class ApiService {
    * @returns An observable of the request
    */
   public patch(endpoint: string, data: object): Observable<object> {
-    this.refreshAuthTokens();
+    this.refreshOrClearTokens();
     const url = new URL(endpoint, this.apiURL);
     return this.http.patch(url.href, data, {headers: this.getAuthHeaders()});
   }
@@ -176,7 +176,7 @@ export class ApiService {
    * @returns An observable of the request
    */
   public delete(endpoint: string): Observable<object> {
-    this.refreshAuthTokens();
+    this.refreshOrClearTokens();
     const url = new URL(endpoint, this.apiURL);
     return this.http.delete(url.href, {headers: this.getAuthHeaders()});
   }
@@ -185,20 +185,30 @@ export class ApiService {
    * Refresh the authentication token if necessary. If the current API session is not authenticated
    * or the authentication token is not expired, this method does nothing.
    */
-  private refreshAuthTokens(): void {
-    // Only refresh the token if the user is logged in and the token has expired
-    if (!this.refreshTokenExpiration || Date.now() < this.refreshTokenExpiration) {
+  private refreshOrClearTokens(): void {
+    // Only refresh the tokens if the user is logged in and the access token has expired
+    const accessTokenExpired: boolean = !!this.accessTokenExpiration && Date.now() < this.accessTokenExpiration;
+    if (!accessTokenExpired) {
       return;
     }
 
-    // If the refresh fails, assume the refresh token is expired and log the user out
-    const refreshHeaders = new HttpHeaders({'Content-Type': 'application/json'});
-    this.http.post(this.refreshEndpoint.href, {refresh: this.refreshToken}, {headers: refreshHeaders}).subscribe({
+    // If the refresh token has expired, the user is effectively logged out. Clear the tokens.
+    const refreshTokenExpired: boolean = !!this.refreshTokenExpiration && Date.now() < this.refreshTokenExpiration;
+    if (refreshTokenExpired) {
+      this.clearTokens();
+      return;
+    }
+
+    const refreshHeaders: HttpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
+    this.http.post(
+      this.refreshEndpoint.href, {refresh: this.refreshToken}, {headers: refreshHeaders}
+    ).subscribe({
       next: (response: any) => {
         this.accessToken = response.access;
       },
-      error: () => {
-        this.logout();
+      error: (err) => {
+        console.log(`Could not refresh auth tokens ${err}`)
+        this.clearTokens()
       }
     });
   }
