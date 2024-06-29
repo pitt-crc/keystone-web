@@ -188,7 +188,10 @@
         <tr *ngFor="let data of requestedResources">
           <td>{{ data.cluster }}</td>
           <td>{{ data.requestedSUs | number }}</td>
-          <td>{{ data.awardedSUs }}</td>
+          <td>
+            <span *ngIf="data.awardedSUs !== null else noAwardedSus">{{ data.awardedSUs | number }}</span>
+            <ng-template #noAwardedSus>--</ng-template>
+          </td>
           <td>
             <div class="progress">
               <div
@@ -218,7 +221,9 @@
         <button class="nav-link" id="insights-tab" data-bs-toggle="tab" data-bs-target="#insights" type="button" role="tab" aria-controls="insights" aria-selected="false">Insights</button>
       </li>
       <li class="nav-item" role="presentation">
-        <button class="nav-link" id="discussion-tab" data-bs-toggle="tab" data-bs-target="#discussion" type="button" role="tab" aria-controls="discussion" aria-selected="false">Discussion ({{ comments.length }})</button>
+        <button class="nav-link" id="discussion-tab" data-bs-toggle="tab" data-bs-target="#discussion" type="button" role="tab" aria-controls="discussion" aria-selected="false">
+          Discussion <span *ngIf="comments.length">({{ comments.length }})</span>
+        </button>
       </li>
     </ul>
 
@@ -244,28 +249,29 @@
         ...
       </div>
 
-      <!-- discussion tab content -->
+      <!-- Discussion tab content -->
       <div class="tab-pane fade" id="discussion" role="tabpanel" aria-labelledby="discussion-tab">
         <div *ngFor="let comment of comments" class="card my-3">
           <div class="card-body">
             {{ comment.author }}
-            <span class="float-end text-muted"><i class="bi bi-clock mx-1"></i> {{ comment.dateTime }}</span><br>
+            <span class="float-end text-muted"><i class="bi bi-clock mx-1"></i> {{ comment.dateTime | date:'short' }}</span><br>
             <p *ngFor="let paragraph of comment.content" class="card-text my-2">{{ paragraph }}</p>
           </div>
         </div>
         <hr>
+        <!-- New Comment Form -->
         <div class="my-3">
-          <form>
+          <form (ngSubmit)="submitComment()" #commentForm="ngForm">
             <div class="mb-3">
-              <textarea class="form-control" id="comments" rows="3" placeholder="Enter your comments here"></textarea>
+              <textarea class="form-control" id="newComment" rows="3" placeholder="Enter your comments here" name="newComment" [(ngModel)]="newComment"></textarea>
             </div>
             <div class="text-end">
               <button type="submit" class="btn btn-primary">Submit</button>
             </div>
           </form>
         </div>
-
       </div>
+
     </div>
   </div>
 
