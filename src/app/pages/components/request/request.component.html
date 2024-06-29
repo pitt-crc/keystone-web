@@ -118,7 +118,7 @@
     </div>
     <div class="card-body">
       <p>
-        The following table details the computational resources awarded under this request.
+        The following table outlines computational resources awarded under this request.
       </p>
       <table class="table">
         <thead>
@@ -199,14 +199,14 @@
         <div *ngFor="let comment of comments" class="card my-3">
           <div class="card-body">
             {{ comment.author }}
-            <span class="float-end text-muted"><i class="bi bi-clock mx-1"></i> {{ comment.dateTime | date:'short' }}</span><br>
+            <span class="float-end text-muted"><i class="bi bi-clock mx-1"></i> {{ comment.dateTime | date:'short' }}</span>
             <p *ngFor="let paragraph of comment.content" class="card-text my-2">{{ paragraph }}</p>
           </div>
         </div>
         <hr>
         <!-- New Comment Form -->
         <div class="my-3">
-          <form (ngSubmit)="handleCommentSubmitted()" #commentForm="ngForm">
+          <form (ngSubmit)="handleCommentSubmitted()">
             <div class="mb-3">
               <textarea class="form-control" id="newComment" rows="3" placeholder="Enter your comments here" name="newComment" [(ngModel)]="newComment"></textarea>
             </div>

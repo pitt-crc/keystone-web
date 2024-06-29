@@ -1,27 +1,38 @@
-import { DecimalPipe } from "@angular/common";
+import { DecimalPipe, NgForOf } from "@angular/common";
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormsModule } from "@angular/forms";
 
+interface ReviewData {
+  comments: string;
+  computeResources: {
+    cluster: string;
+    requestedSu: number;
+    awardedSu: number;
+  }[];
+  status: string;
+}
+
 @Component({
   selector: 'app-review-form',
-  templateUrl: './review-form.component.html',
+  templateUrl: 'review-form.component.html',
   imports: [
     FormsModule,
-    DecimalPipe
+    DecimalPipe,
+    NgForOf
   ],
   standalone: true
 })
 export class ReviewFormComponent {
   @Input() requestedResources: any[] = [];
-  @Output() reviewSubmitted = new EventEmitter<any>();
+  @Output() reviewSubmitted: EventEmitter<ReviewData> = new EventEmitter<any>();
 
-  review = {
+  formData: ReviewData = {
     status: 'approve',
-    requestedResources: this.requestedResources,
+    computeResources: this.requestedResources,
     comments: ''
   };
 
-  submitReview() {
-    this.reviewSubmitted.emit(this.review);
+  submitReview(): void {
+    this.reviewSubmitted.emit(this.formData);
   }
 }

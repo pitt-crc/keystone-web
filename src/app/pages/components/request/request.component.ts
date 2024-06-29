@@ -76,7 +76,7 @@ export class RequestComponent {
   ];
 
   newComment: string = ''; // Property to hold new comment text
-  handleCommentSubmitted() {
+  handleCommentSubmitted(): void {
     if (this.newComment.trim() === '') {
       return;
     }
@@ -91,7 +91,7 @@ export class RequestComponent {
     this.newComment = ''; // Clear the textarea after submission
   }
 
-  handleReviewSubmitted(review: any) {
+  handleReviewSubmitted(review: any): void {
     console.log('Review Submitted:', review);
   }
 }
