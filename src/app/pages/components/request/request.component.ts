@@ -11,6 +11,8 @@ import { LayoutSideNavComponent } from "../../../layouts/components/layout-side-
   imports: [LayoutSideNavComponent, NgClass, DatePipe, NgIf, NgForOf, DecimalPipe, FormsModule]
 })
 export class RequestComponent {
+  isAdmin: boolean = true;
+
   // Request meta data
   requestTitle: string = "Rotational Energies In Nearby Satellite Galaxies";
   requestStatus: string = "Pending";

@@ -14,7 +14,7 @@
       </span>
       </h1>
     </div>
-    <div class="col-xl-auto text-xl-end">
+    <div *ngIf="isAdmin" class="col-xl-auto text-xl-end">
       <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#reviewModal">
         Submit Review
       </button>
@@ -22,7 +22,7 @@
   </div>
 
   <!-- Modal for submitting review -->
-  <div class="modal fade" id="reviewModal" tabindex="-1" aria-labelledby="reviewModalLabel" aria-hidden="true">
+  <div *ngIf="isAdmin" class="modal fade" id="reviewModal" tabindex="-1" aria-labelledby="reviewModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
@@ -217,7 +217,7 @@
       <li class="nav-item" role="presentation">
         <button class="nav-link active" id="justification-tab" data-bs-toggle="tab" data-bs-target="#justification" type="button" role="tab" aria-controls="justification" aria-selected="true">Justification</button>
       </li>
-      <li class="nav-item" role="presentation">
+      <li *ngIf="isAdmin" class="nav-item" role="presentation">
         <button class="nav-link" id="insights-tab" data-bs-toggle="tab" data-bs-target="#insights" type="button" role="tab" aria-controls="insights" aria-selected="false">Insights</button>
       </li>
       <li class="nav-item" role="presentation">
@@ -245,7 +245,7 @@
       </div>
 
       <!-- Insights tab content -->
-      <div class="tab-pane fade" id="insights" role="tabpanel" aria-labelledby="insights-tab">
+      <div *ngIf="isAdmin" class="tab-pane fade" id="insights" role="tabpanel" aria-labelledby="insights-tab">
         ...
       </div>
 
