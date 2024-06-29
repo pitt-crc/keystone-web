@@ -14,7 +14,7 @@
       </span>
       </h1>
     </div>
-    <div *ngIf="isAdmin" class="col-xl-auto text-xl-end">
+    <div class="col-xl-auto text-xl-end">
       <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#reviewModal">
         Submit Review
       </button>
@@ -26,67 +26,12 @@
     <div class="modal-dialog modal-lg modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <!-- Modal Title -->
           <h5 class="modal-title" id="reviewModalLabel">Submit Review</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
           <p>General instructions for admins go in this paragraph.</p>
-          <form>
-            <div class="mb-3 d-flex align-items-center">
-              <label class="form-label me-2 align-middle" for="status">Status</label>
-              <select class="form-select" id="status" name="status">
-                <option value="approve" selected>Approve</option>
-                <option value="deny">Deny</option>
-              </select>
-            </div>
-            <table class="table table-sm">
-              <thead>
-              <tr>
-                <th>Cluster</th>
-                <th>Requested SUs</th>
-                <th>Awarded SUs</th>
-              </tr>
-              </thead>
-              <tbody>
-              <tr>
-                <td>MPI</td>
-                <td>100,000</td>
-                <td>
-                  <input type="text" class="form-control" id="mpi_awarded_su" name="mpi_awarded_su">
-                </td>
-              </tr>
-              <tr>
-                <td>SMP</td>
-                <td>150,000</td>
-                <td>
-                  <input type="text" class="form-control" id="smp_awarded_su" name="smp_awarded_su">
-                </td>
-              </tr>
-              <tr>
-                <td>HTC</td>
-                <td>0</td>
-                <td>
-                  <input type="text" class="form-control" id="htc_awarded_su" name="htc_awarded_su">
-                </td>
-              </tr>
-              <tr>
-                <td>GPU</td>
-                <td>0</td>
-                <td>
-                  <input type="text" class="form-control" id="gpu_awarded_su" name="gpu_awarded_su">
-                </td>
-              </tr>
-              </tbody>
-            </table>
-            <div class="mb-3">
-              <textarea class="form-control" id="review" rows="3" placeholder="Enter review comments here"></textarea>
-            </div>
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Submit</button>
+          <app-review-form [requestedResources]="requestedResources" (reviewSubmitted)="handleReviewSubmitted($event)"></app-review-form>
         </div>
       </div>
     </div>
@@ -261,7 +206,7 @@
         <hr>
         <!-- New Comment Form -->
         <div class="my-3">
-          <form (ngSubmit)="submitComment()" #commentForm="ngForm">
+          <form (ngSubmit)="handleCommentSubmitted()" #commentForm="ngForm">
             <div class="mb-3">
               <textarea class="form-control" id="newComment" rows="3" placeholder="Enter your comments here" name="newComment" [(ngModel)]="newComment"></textarea>
             </div>

@@ -3,12 +3,13 @@ import { Component } from '@angular/core';
 import { FormsModule } from "@angular/forms";
 
 import { LayoutSideNavComponent } from "../../../layouts/components/layout-side-nav/layout-side-nav.component";
+import { ReviewFormComponent } from "../../../shared/components/review-form/review-form.component";
 
 @Component({
   selector: 'app-RequestPage',
   standalone: true,
   templateUrl: 'request.component.html',
-  imports: [LayoutSideNavComponent, NgClass, DatePipe, NgIf, NgForOf, DecimalPipe, FormsModule]
+  imports: [LayoutSideNavComponent, NgClass, DatePipe, NgIf, NgForOf, DecimalPipe, FormsModule, ReviewFormComponent]
 })
 export class RequestComponent {
   isAdmin: boolean = true;
@@ -75,7 +76,7 @@ export class RequestComponent {
   ];
 
   newComment: string = ''; // Property to hold new comment text
-  submitComment() {
+  handleCommentSubmitted() {
     if (this.newComment.trim() === '') {
       return;
     }
@@ -88,6 +89,10 @@ export class RequestComponent {
 
     this.comments.push(newCommentObj);
     this.newComment = ''; // Clear the textarea after submission
+  }
+
+  handleReviewSubmitted(review: any) {
+    console.log('Review Submitted:', review);
   }
 }
 
