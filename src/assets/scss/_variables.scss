@@ -1,18 +1,7 @@
-$theme-colors: (
-  "primary": #324871,
-  "secondary": #B6C5D1,
-  "success": #1EC074,
-  "info": #14b7d9,
-  "warning": #FACA6C,
-  "danger": #ED0F2D,
-  "light": #F3F5F6,
-  "dark": #212529
-);
-
 // Top navigation component
 $topnav-height: 3.5rem;
 
 // Sidebar navigation component
-$sidebar-bg-light: map-get($theme-colors, 'light');
+$sidebar-bg-light: #F3F5F6;
 $sidebar-width: 16rem;
-$sidebar-bg-dark: map-get($theme-colors, 'primary');
+$sidebar-bg-dark:  #324871;

@@ -1,18 +1,14 @@
 <app-layout-center-page>
   <div class="d-flex align-items-center justify-content-center vh-100">
     <div class="text-center">
-      <h1 class="display-1 fw-bold text-primary">404</h1>
-      <p class="fs-3 mb-2">
-        <span class="text-danger fw-bold">Error:</span> Page not found
+      <h1 class="display-1 fw-bold text-primary my-2">404</h1>
+      <p class="fs-3 my-2">
+        Page not found
       </p>
-      <p class="lead mb-4">
+      <p class="lead my-2">
         We couldn't find the page you're looking for.<br/>
-        Please refresh the page or choose from the options below.
+        Please refresh the page or <a class="link-info" (click)="goHome()">return home</a>.
       </p>
-      <div>
-        <a class="btn btn-primary btn-lg mx-3" (click)="goHome()">Take Me Home</a>
-        <a class="btn btn-secondary btn-lg mx-3" (click)="goBack()">Take Me Back</a>
-      </div>
     </div>
   </div>
 </app-layout-center-page>

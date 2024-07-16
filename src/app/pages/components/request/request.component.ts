@@ -47,7 +47,7 @@ export class RequestComponent {
       cluster: 'SMP',
       requestedSUs: 150000,
       awardedSUs: null,
-      utilization: 0
+      utilization: 20
     }
   ];
   attachments = [
