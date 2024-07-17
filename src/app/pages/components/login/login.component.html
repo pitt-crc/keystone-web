@@ -3,18 +3,18 @@
     <div class="card-body">
       <div class="m-sm-3">
         <div class="text-center">
-          <h1 class="h2">Welcome Back</h1>
+          <h1 class="navbar-brand fs-4">Keystone</h1>
           <p class="lead">Please sign in to continue</p>
           <p class="fw-bold text-danger">{{ errorMessage }}</p>
         </div>
         <form class="mt-4" (ngSubmit)="onSubmit()" ngNativeValidate>
-          <div>
-            <label class="form-label">Username</label>
-            <input class="form-control form-control-lg" placeholder="Enter your username" [(ngModel)]="username" name="username" required autofocus/>
+          <div class="my-4">
+            <label>Username</label>
+            <input class="form-control" placeholder="Enter your username" [(ngModel)]="username" name="username" required autofocus/>
           </div>
-          <div class="mt-3">
-            <label class="form-label">Password</label>
-            <input class="form-control form-control-lg" type="password" placeholder="Enter your password" [(ngModel)]="password" name="password" required/>
+          <div class="my-4">
+            <label>Password</label>
+            <input class="form-control" type="password" placeholder="Enter your password" [(ngModel)]="password" name="password" required/>
           </div>
           <div class="d-grid mt-5">
             <button class="btn btn-lg btn-primary" [disabled]="!submitButtonEnabled">

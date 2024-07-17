@@ -20,11 +20,4 @@ export class PageNotFoundComponent {
   goHome(): void {
     this.router.navigateByUrl('');
   }
-
-  /**
-   * Navigate the user to the previous location in their browser history.
-   */
-  goBack(): void {
-    this.location.back();
-  }
 }

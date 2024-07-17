@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600,700&display=swap');
+
 @import "bootstrap/scss/mixins/banner";
 @include bsBanner("");
 
@@ -5,6 +7,7 @@
 @import "bootstrap/scss/functions";
 
 // Custom variable overrides
+@import "pixel/variables";
 @import "variables";
 
 // Bootstrap default configuration
@@ -52,3 +55,10 @@
 
 // Bootstrap utilities
 @import "bootstrap/scss/utilities/api";
+
+// Third party theme content
+@import "pixel/mixins";
+@import "pixel/functions";
+@import "pixel/utilities";
+@import "pixel/layout";
+@import "pixel/components";
