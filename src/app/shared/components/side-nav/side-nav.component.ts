@@ -23,11 +23,12 @@ interface NavSection {
   styleUrl: 'side-nav.component.scss'
 })
 export class SideNavComponent implements OnInit {
-  isActive: boolean = false;
+  // TODO: move nt a user data service
   userImageUrl: string = "https://github.com/mdo.png";
-  firstName: string = "John Smith"
-  username: string = "jsmith"
+  firstName: string = "John Smith";
+  username: string = "jsmith";
 
+  isActive: boolean = false;
   navStructure: NavSection[] = [
     {
       title: 'Overview',
