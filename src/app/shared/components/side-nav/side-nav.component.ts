@@ -23,7 +23,7 @@ interface NavSection {
   styleUrl: 'side-nav.component.scss'
 })
 export class SideNavComponent implements OnInit {
-  // TODO: move nt a user data service
+  // TODO: move this data into a user data service
   userImageUrl: string = "https://github.com/mdo.png";
   firstName: string = "John Smith";
   username: string = "jsmith";
