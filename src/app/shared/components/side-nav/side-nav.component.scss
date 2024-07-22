@@ -8,6 +8,7 @@
   height: calc(100% - $topnav-height);
   transform: translateX(-100%); /* Initially hide the sidebar */
   transition: transform 0.3s ease-in-out;
+  z-index: 2000; // Default bootstrap indices are in the 1000-1999 range
 
   &.active {
     transform: translateX(0); /* Show the sidebar when active */
