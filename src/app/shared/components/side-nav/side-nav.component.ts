@@ -1,4 +1,4 @@
-import { NgForOf, NgOptimizedImage } from "@angular/common";
+import { NgForOf, NgIf, NgOptimizedImage } from "@angular/common";
 import { Component, OnInit } from '@angular/core';
 import { RouterLink } from "@angular/router";
 
@@ -18,28 +18,30 @@ interface NavSection {
 @Component({
   selector: 'app-side-nav',
   standalone: true,
-  imports: [NgForOf, NgOptimizedImage, RouterLink],
+  imports: [NgForOf, NgOptimizedImage, RouterLink, NgIf],
   templateUrl: 'side-nav.component.html',
   styleUrl: 'side-nav.component.scss'
 })
 export class SideNavComponent implements OnInit {
   isActive: boolean = false;
+  userImageUrl: string = "https://github.com/mdo.png";
+  firstName: string = "John Smith"
+  username: string = "jsmith"
+
   navStructure: NavSection[] = [
     {
       title: 'Overview',
       links: [
         {text: 'Dashboard', href: '/app', icon: 'speedometer'},
       ]
-    },
-    {
+    }, {
       title: 'Resources',
       links: [
         {text: 'Requests', href: 'resources/requests', icon: 'arrow-clockwise'},
         {text: 'Allocations', href: 'resources/allocations', icon: 'cpu'},
         {text: 'Job History', href: 'resources/usage', icon: 'bar-chart'}
       ]
-    },
-    {
+    }, {
       title: 'Research',
       links: [
         {text: 'Publications', href: 'research/publications', icon: 'journal-text'},

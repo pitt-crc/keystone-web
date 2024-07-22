@@ -1,15 +1,15 @@
-<div class="sidebar bg-primary text-white" [class.active]="isActive">
+<div class="sidebar bg-primary text-white" [class.active]="isActive" role="navigation">
   <div class="d-flex flex-column flex-shrink-0 p-4">
 
     <!-- Sidebar user/research group section -->
     <div class="sidebar-section-user mt-1 mb-4">
       <div class="d-flex align-items-center">
         <div class="flex-shrink-0">
-          <img [src]="'https://github.com/mdo.png'" width="40" height="40" class="rounded" >
+          <img [src]="userImageUrl" width="40" height="40" class="rounded">
         </div>
         <div class="flex-grow-1 ps-2">
-          <div class="fw-bold">John Smith</div>
-          <div><span class="me-1">&commat;</span>jsmith</div>
+          <div class="fw-bold">{{ firstName }}</div>
+          <div><span class="me-1">&commat;</span>{{ username }}</div>
         </div>
       </div>
     </div>
