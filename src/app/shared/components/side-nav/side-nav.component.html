@@ -1,4 +1,4 @@
-<div class="sidebar" [class.active]="isActive">
+<div class="sidebar bg-primary text-white" [class.active]="isActive">
   <div class="d-flex flex-column flex-shrink-0 p-4">
 
     <!-- Sidebar user/research group section -->
@@ -8,31 +8,25 @@
           <img [src]="'https://github.com/mdo.png'" width="40" height="40" class="rounded" >
         </div>
         <div class="flex-grow-1 ps-2">
-          <div><strong>John Smith</strong></div>
-          <a class="dropdown-toggle text-decoration-none text-reset" href="#" id="dropdownGroup" data-bs-toggle="dropdown" aria-expanded="false">
-            Research Group 1
-          </a>
-          <ul class="dropdown-menu dropdown-menu-start" aria-labelledby="dropdownGroup">
-            <li><a class="dropdown-item" href="#">Research Group 1</a></li>
-            <li><a class="dropdown-item" href="#">Research Group 2</a></li>
-          </ul>
+          <div class="fw-bold">John Smith</div>
+          <div><span class="me-1">&commat;</span>jsmith</div>
         </div>
       </div>
     </div>
 
     <!-- Sidebar navigation links -->
     <ng-container *ngFor="let navSection of navStructure">
-      <div class="sidebar-section-title">
-        {{ navSection.title }}
+      <div class="my-2">
+        <div class="fw-bold">{{ navSection.title }}</div>
+        <ul class="d-flex flex-column nav nav-pills">
+          <li class="nav-item my-0" *ngFor="let navItem of navSection.links">
+            <a [routerLink]="navItem.href" class="nav-link py-2">
+              <i class="bi bi-{{ navItem.icon }} align-middle"></i>
+              <span class="align-middle mx-2">{{ navItem.text }}</span>
+            </a>
+          </li>
+        </ul>
       </div>
-      <ul class="sidebar-section-links nav nav-pills flex-column mb-4">
-        <li class="nav-item" *ngFor="let navItem of navSection.links">
-          <a [routerLink]="navItem.href" class="nav-link">
-            <i class="bi bi-{{ navItem.icon }} align-middle"></i>
-            <span class="align-middle m-2">{{ navItem.text }}</span>
-          </a>
-        </li>
-      </ul>
     </ng-container>
 
   </div>

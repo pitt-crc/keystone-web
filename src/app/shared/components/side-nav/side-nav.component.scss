@@ -6,8 +6,6 @@
   top: $topnav-height;
   width: $sidebar-width;
   height: calc(100% - $topnav-height);
-  color: $sidebar-bg-light;
-  background-color: $sidebar-bg-dark;
   transform: translateX(-100%); /* Initially hide the sidebar */
   transition: transform 0.3s ease-in-out;
 
@@ -20,20 +18,11 @@
   }
 }
 
-.sidebar-section-user .dropdown-menu {
-  min-width: 15rem;
+.nav-link {
+  border: none;
 }
 
-.sidebar-section-title {
-  font-weight: 400;
-}
-
-.sidebar-section-links .nav-link {
-  font-weight: 300;
-  color: $sidebar-bg-light;
-}
-
-.sidebar-section-links .nav-link:hover {
+.nav-link:hover {
   background-color: $sidebar-bg-light;
   color: $sidebar-bg-dark;
 }
