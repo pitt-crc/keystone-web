@@ -7,8 +7,7 @@ import { Component, Input, OnChanges } from '@angular/core';
   templateUrl: './status-badge.component.html',
   imports: [
     NgClass
-  ],
-  styleUrls: ['./status-badge.component.scss']
+  ]
 })
 export class StatusBadgeComponent implements OnChanges {
   @Input() status: string = 'Pending';
