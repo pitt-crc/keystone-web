@@ -1,4 +1,4 @@
-import { NgClass } from "@angular/common";
+import { NgClass, TitleCasePipe } from "@angular/common";
 import { Component, Input, OnChanges } from '@angular/core';
 
 @Component({
@@ -6,7 +6,8 @@ import { Component, Input, OnChanges } from '@angular/core';
   standalone: true,
   templateUrl: './status-badge.component.html',
   imports: [
-    NgClass
+    NgClass,
+    TitleCasePipe
   ]
 })
 export class StatusBadgeComponent implements OnChanges {
