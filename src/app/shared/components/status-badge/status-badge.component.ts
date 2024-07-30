@@ -11,8 +11,8 @@ import { Component, Input, OnChanges } from '@angular/core';
   ]
 })
 export class StatusBadgeComponent implements OnChanges {
-  @Input() status: string = 'Pending';
-  cssClass: string = '';
+  @Input() status: string = "active";
+  cssClass: string = 'bg-success';
 
   ngOnChanges() {
     this.cssClass = this.getClassForStatus(this.status);
