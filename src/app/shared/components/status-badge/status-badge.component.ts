@@ -28,15 +28,17 @@ export class StatusBadgeComponent implements OnChanges {
     const normalizedStatus: string = status.toLowerCase();
     switch (normalizedStatus) {
       case 'pending':
-        return 'bg-secondary';
-      case 'approved':
         return 'bg-warning';
+      case 'approved':
+        return 'bg-info';
       case 'active':
         return 'bg-success';
       case 'denied':
         return 'bg-danger';
+      case 'expired':
+        return 'bg-danger';
       default:
-        return '';
+        return 'bg-secondary';
     }
   }
 }

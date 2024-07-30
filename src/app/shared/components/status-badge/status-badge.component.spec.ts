@@ -28,21 +28,29 @@ describe('StatusBadgeComponent', () => {
   });
 
   it('should update cssClass when status changes', () => {
-    component.status = 'Approved';
+    component.status = 'pending';
     component.ngOnChanges();
     expect(component.cssClass).toBe('bg-warning');
 
-    component.status = 'Active';
+    component.status = 'approved';
+    component.ngOnChanges();
+    expect(component.cssClass).toBe('bg-info');
+
+    component.status = 'active';
     component.ngOnChanges();
     expect(component.cssClass).toBe('bg-success');
 
-    component.status = 'Denied';
+    component.status = 'denied';
     component.ngOnChanges();
     expect(component.cssClass).toBe('bg-danger');
 
-    component.status = 'Unknown';
+    component.status = 'expired';
     component.ngOnChanges();
-    expect(component.cssClass).toBe('');
+    expect(component.cssClass).toBe('bg-danger');
+
+    component.status = 'other';
+    component.ngOnChanges();
+    expect(component.cssClass).toBe('bg-secondary');
   });
 
   it('should display the status with title case', () => {
