@@ -187,13 +187,13 @@ export class ApiService {
    */
   private refreshOrClearTokens(): void {
     // Only refresh the tokens if the user is logged in and the access token has expired
-    const accessTokenExpired: boolean = !!this.accessTokenExpiration && Date.now() < this.accessTokenExpiration;
+    const accessTokenExpired: boolean = Date.now() >= this.accessTokenExpiration;
     if (!accessTokenExpired) {
       return;
     }
 
     // If the refresh token has expired, the user is effectively logged out. Clear the tokens.
-    const refreshTokenExpired: boolean = !!this.refreshTokenExpiration && Date.now() < this.refreshTokenExpiration;
+    const refreshTokenExpired: boolean = Date.now() >= this.refreshTokenExpiration;
     if (refreshTokenExpired) {
       this.clearTokens();
       return;
