@@ -35,13 +35,13 @@ export class ApiService {
 
   /**
    * Get the expiration time of the JWT access token.
-   * @returns The expiration time of the access token in milliseconds if available, otherwise null
+   * @returns The expiration time of the access token in milliseconds if available, otherwise the current time
    */
-  private get accessTokenExpiration(): number | null {
+  private get accessTokenExpiration(): number {
     if (this.accessToken) {
       return <number>jwtDecode(this.accessToken).exp * 1000;
     } else {
-      return null;
+      return Date.now();
     }
   }
 
@@ -63,13 +63,13 @@ export class ApiService {
 
   /**
    * Get the expiration time of the refresh token.
-   * @returns The expiration time of the refresh token in milliseconds if available, otherwise null
+   * @returns The expiration time of the refresh token in milliseconds if available, otherwise the current time
    */
-  private get refreshTokenExpiration(): number | null {
+  private get refreshTokenExpiration(): number {
     if (this.refreshToken) {
       return <number>jwtDecode(this.refreshToken).exp * 1000;
     } else {
-      return null;
+      return Date.now();
     }
   }
 
